@@ -17,6 +17,7 @@ const contentTypes = {
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
   ".ico": "image/x-icon",
+  ".xml": "application/xml; charset=utf-8",
 };
 
 if (!existsSync(join(staticRoot, "index.html"))) {
