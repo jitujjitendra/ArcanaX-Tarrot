@@ -1,0 +1,1390 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "name": "ArcanaX Cosmic Tarot Deck",
+    "totalCards": 78,
+    "description": "Complete 78-card tarot deck with cosmic interpretations for ArcanaX"
+  },
+  "majorArcana": [
+    {
+      "id": "the-fool",
+      "name": "The Fool",
+      "number": 0,
+      "element": "air",
+      "zodiac": "Uranus",
+      "keywords": [
+        "beginnings",
+        "innocence",
+        "leap of faith",
+        "spontaneity",
+        "freedom"
+      ],
+      "upright": "A new chapter unfolds before you. Step forward with childlike wonder and trust the cosmic current carrying you toward your destiny.",
+      "reversed": "Recklessness clouds your judgment. Pause before the edge - not every leap leads to flight. Ground yourself before moving forward.",
+      "essence": "The eternal wanderer at the cliff of infinite possibility, where every ending births a new beginning."
+    },
+    {
+      "id": "the-magician",
+      "name": "The Magician",
+      "number": 1,
+      "element": "air",
+      "zodiac": "Mercury",
+      "keywords": [
+        "manifestation",
+        "willpower",
+        "resourcefulness",
+        "skill",
+        "concentration"
+      ],
+      "upright": "All tools of creation lie before you. Channel your will through focused intention - you possess everything needed to manifest your vision into reality.",
+      "reversed": "Scattered energy and untapped potential. Beware of manipulation or trickery. Realign your gifts with authentic purpose.",
+      "essence": "The cosmic alchemist who transforms thought into matter, bridging heaven and earth through pure will."
+    },
+    {
+      "id": "the-high-priestess",
+      "name": "The High Priestess",
+      "number": 2,
+      "element": "water",
+      "zodiac": "Moon",
+      "keywords": [
+        "intuition",
+        "mystery",
+        "inner wisdom",
+        "subconscious",
+        "patience"
+      ],
+      "upright": "The veil between worlds grows thin. Trust your inner knowing - the answers you seek lie not in the external world but within the depths of your own soul.",
+      "reversed": "Disconnection from intuition. Secrets kept too long become poison. Allow hidden knowledge to surface and trust what emerges.",
+      "essence": "Guardian of the cosmic threshold, keeper of mysteries that reveal themselves only to those who listen in silence."
+    },
+    {
+      "id": "the-empress",
+      "name": "The Empress",
+      "number": 3,
+      "element": "earth",
+      "zodiac": "Venus",
+      "keywords": [
+        "abundance",
+        "nurturing",
+        "creativity",
+        "fertility",
+        "sensuality"
+      ],
+      "upright": "Creation flows through you effortlessly. Nurture what grows - whether project, relationship, or self. The universe provides in abundance to those who tend their garden.",
+      "reversed": "Creative blocks and neglected self-care. You have been giving without receiving. Return to yourself and replenish what has been depleted.",
+      "essence": "The cosmic mother whose touch makes barren fields bloom, embodying the lush abundance of nature herself."
+    },
+    {
+      "id": "the-emperor",
+      "name": "The Emperor",
+      "number": 4,
+      "element": "fire",
+      "zodiac": "Aries",
+      "keywords": [
+        "authority",
+        "structure",
+        "stability",
+        "leadership",
+        "discipline"
+      ],
+      "upright": "Build your empire on foundations of wisdom. Structure and discipline transform dreams into dynasties. Lead with strength tempered by fairness.",
+      "reversed": "Tyranny or rigidity suffocates growth. Authority without compassion breeds rebellion. Loosen your grip to strengthen your hold.",
+      "essence": "The cosmic architect who shapes chaos into order, ruling not through force but through the gravity of purpose."
+    },
+    {
+      "id": "the-hierophant",
+      "name": "The Hierophant",
+      "number": 5,
+      "element": "earth",
+      "zodiac": "Taurus",
+      "keywords": [
+        "tradition",
+        "spiritual wisdom",
+        "conformity",
+        "mentorship",
+        "ceremony"
+      ],
+      "upright": "Seek wisdom from those who walked before you. Tradition carries power when understood deeply. A teacher or system offers the structure your spirit needs now.",
+      "reversed": "Question inherited beliefs that no longer serve your truth. Blind conformity dims your inner light. Find your own path to the sacred.",
+      "essence": "The bridge between divine wisdom and earthly understanding, channeling ancient truth through living tradition."
+    },
+    {
+      "id": "the-lovers",
+      "name": "The Lovers",
+      "number": 6,
+      "element": "air",
+      "zodiac": "Gemini",
+      "keywords": [
+        "love",
+        "union",
+        "choices",
+        "harmony",
+        "alignment"
+      ],
+      "upright": "A profound choice stands before you - one that aligns head and heart. True union begins with loving yourself wholly. Choose what makes your soul sing.",
+      "reversed": "Disharmony and misaligned values. A choice avoided grows heavier with time. Face the truth of what your heart truly desires.",
+      "essence": "The sacred geometry of two souls recognizing themselves in each other, where choice becomes destiny."
+    },
+    {
+      "id": "the-chariot",
+      "name": "The Chariot",
+      "number": 7,
+      "element": "water",
+      "zodiac": "Cancer",
+      "keywords": [
+        "determination",
+        "triumph",
+        "willpower",
+        "control",
+        "momentum"
+      ],
+      "upright": "Victory through sheer force of will. Harness opposing forces and drive forward with unwavering determination. The stars align for those who refuse to stop.",
+      "reversed": "Loss of direction and scattered willpower. Aggression without strategy leads nowhere. Regain control of your inner forces before charging ahead.",
+      "essence": "The cosmic warrior whose victory comes not from destroying opposition but from mastering the forces within."
+    },
+    {
+      "id": "strength",
+      "name": "Strength",
+      "number": 8,
+      "element": "fire",
+      "zodiac": "Leo",
+      "keywords": [
+        "courage",
+        "inner strength",
+        "compassion",
+        "patience",
+        "influence"
+      ],
+      "upright": "True power flows from gentleness. Tame your inner beasts not with force but with love. Your quiet courage moves mountains that brute strength cannot.",
+      "reversed": "Self-doubt undermines your natural power. Fear of your own strength keeps you small. Embrace the fierce compassion that lives within you.",
+      "essence": "The infinite patience that gentles the wild, proving that the softest hand holds the strongest power."
+    },
+    {
+      "id": "the-hermit",
+      "name": "The Hermit",
+      "number": 9,
+      "element": "earth",
+      "zodiac": "Virgo",
+      "keywords": [
+        "solitude",
+        "inner guidance",
+        "reflection",
+        "wisdom",
+        "soul-searching"
+      ],
+      "upright": "Withdraw from the noise to find your signal. The lantern of truth lights only for those willing to walk alone. Solitude is not loneliness - it is communion with self.",
+      "reversed": "Isolation becomes avoidance. Too long in the cave dims your connection to life. Bring your inner wisdom back to the world that needs it.",
+      "essence": "The lone star that guides by shining inward first, proving that the deepest journeys require no distance at all."
+    },
+    {
+      "id": "wheel-of-fortune",
+      "name": "Wheel of Fortune",
+      "number": 10,
+      "element": "fire",
+      "zodiac": "Jupiter",
+      "keywords": [
+        "destiny",
+        "cycles",
+        "turning point",
+        "luck",
+        "karma"
+      ],
+      "upright": "The great wheel turns in your favor. Cycles complete and new ones begin. Embrace change as the cosmic constant - what rises will fall, what falls will rise again.",
+      "reversed": "Resistance to inevitable change creates suffering. Bad luck is often unlearned lessons returning. Accept the turn and find the gift within disruption.",
+      "essence": "The eternal spiral of fate where every ending curves back into beginning, and fortune favors those who dance with change."
+    },
+    {
+      "id": "justice",
+      "name": "Justice",
+      "number": 11,
+      "element": "air",
+      "zodiac": "Libra",
+      "keywords": [
+        "fairness",
+        "truth",
+        "cause and effect",
+        "clarity",
+        "accountability"
+      ],
+      "upright": "Truth cuts through illusion. Face consequences with dignity and make decisions with clear-eyed fairness. The universe balances all accounts in time.",
+      "reversed": "Injustice or dishonesty clouds the situation. Accountability avoided today becomes a heavier debt tomorrow. Seek truth even when it is uncomfortable.",
+      "essence": "The cosmic scales that weigh not just action but intention, where truth is the only currency that never devalues."
+    },
+    {
+      "id": "the-hanged-man",
+      "name": "The Hanged Man",
+      "number": 12,
+      "element": "water",
+      "zodiac": "Neptune",
+      "keywords": [
+        "surrender",
+        "new perspective",
+        "letting go",
+        "sacrifice",
+        "patience"
+      ],
+      "upright": "Suspend your struggle. The answer comes not from pushing harder but from releasing entirely. See the world from a new angle - what seemed stuck is actually transforming.",
+      "reversed": "Needless martyrdom and stalling. You mistake paralysis for patience. The time for waiting has passed - act from your new understanding.",
+      "essence": "The cosmic pause where gravity reverses and surrender becomes the most powerful act of will."
+    },
+    {
+      "id": "death",
+      "name": "Death",
+      "number": 13,
+      "element": "water",
+      "zodiac": "Scorpio",
+      "keywords": [
+        "transformation",
+        "endings",
+        "rebirth",
+        "release",
+        "transition"
+      ],
+      "upright": "Something must end for the new to be born. Release what has completed its cycle with gratitude. This death is not destruction - it is the composting that feeds new life.",
+      "reversed": "Resistance to necessary endings prolongs suffering. Clinging to the dead past prevents rebirth. Let go - you cannot take the old self into the new world.",
+      "essence": "The cosmic threshold where form dissolves back into potential, proving that death is merely transformation wearing a mask."
+    },
+    {
+      "id": "temperance",
+      "name": "Temperance",
+      "number": 14,
+      "element": "fire",
+      "zodiac": "Sagittarius",
+      "keywords": [
+        "balance",
+        "moderation",
+        "patience",
+        "harmony",
+        "alchemy"
+      ],
+      "upright": "Blend opposites into gold. Patient mixing of disparate elements creates something neither could be alone. Flow between extremes with the grace of water finding its level.",
+      "reversed": "Imbalance and excess disrupt your harmony. Impatience spoils what needs slow brewing. Return to center and trust the process of gradual integration.",
+      "essence": "The cosmic alchemist who pours fire into water and creates steam - the art of sacred balance in motion."
+    },
+    {
+      "id": "the-devil",
+      "name": "The Devil",
+      "number": 15,
+      "element": "earth",
+      "zodiac": "Capricorn",
+      "keywords": [
+        "shadow self",
+        "bondage",
+        "addiction",
+        "materialism",
+        "temptation"
+      ],
+      "upright": "Face your chains honestly - most are self-imposed. Shadow patterns repeat until witnessed with courage. Name your attachments to begin dissolving their power over you.",
+      "reversed": "Breaking free from old patterns and addictions. The chains were never locked. Reclaim power you gave away to fear, habit, or comfort.",
+      "essence": "The mirror in the dark that shows not monsters but our own forgotten power, chained by nothing but the belief in bondage."
+    },
+    {
+      "id": "the-tower",
+      "name": "The Tower",
+      "number": 16,
+      "element": "fire",
+      "zodiac": "Mars",
+      "keywords": [
+        "upheaval",
+        "sudden change",
+        "revelation",
+        "awakening",
+        "liberation"
+      ],
+      "upright": "Lightning strikes the structures built on false foundations. What crumbles was never truly stable. In the rubble lies liberation - the truth that sets you painfully, beautifully free.",
+      "reversed": "Avoiding inevitable collapse only delays and amplifies it. Internal upheaval that has not yet externalized. Prepare for necessary destruction with grace.",
+      "essence": "The cosmic lightning that illuminates by destroying, proving that some truths can only be revealed through the shattering of comfortable lies."
+    },
+    {
+      "id": "the-star",
+      "name": "The Star",
+      "number": 17,
+      "element": "air",
+      "zodiac": "Aquarius",
+      "keywords": [
+        "hope",
+        "inspiration",
+        "renewal",
+        "serenity",
+        "cosmic connection"
+      ],
+      "upright": "After the storm, stars emerge. Pour your healing into the world without fear of emptying - you are connected to an infinite source. Hope is not naive; it is revolutionary.",
+      "reversed": "Disconnection from hope and inspiration. Faith tested by darkness. Remember - stars shine brightest when the night is deepest. Reconnect to your cosmic source.",
+      "essence": "The cosmic wellspring that pours infinite light into finite form, proving that hope is the most radical act of creation."
+    },
+    {
+      "id": "the-moon",
+      "name": "The Moon",
+      "number": 18,
+      "element": "water",
+      "zodiac": "Pisces",
+      "keywords": [
+        "illusion",
+        "intuition",
+        "fear",
+        "subconscious",
+        "dreams"
+      ],
+      "upright": "Not all is as it appears. Navigate by feeling, not sight. The subconscious speaks in symbols and dreams - listen, but do not mistake shadows for substance.",
+      "reversed": "Confusion lifts as truth surfaces. Fears faced lose their distorted power. Trust what emerges from the deep but verify with waking eyes.",
+      "essence": "The cosmic mirror that reflects our deepest fears as shadows on the cave wall, where illusion and intuition dance as one."
+    },
+    {
+      "id": "the-sun",
+      "name": "The Sun",
+      "number": 19,
+      "element": "fire",
+      "zodiac": "Sun",
+      "keywords": [
+        "joy",
+        "success",
+        "vitality",
+        "clarity",
+        "celebration"
+      ],
+      "upright": "Radiant success illuminates your path. Bask in earned joy without guilt. Your authentic self shines brightest now - let warmth flow outward to all you touch.",
+      "reversed": "Temporary clouds dim but cannot extinguish your light. Delayed success or dimmed enthusiasm. The sun has not gone - only your view is obscured.",
+      "essence": "The cosmic fire that asks nothing in return for its warmth, proving that true power lies in effortless radiance."
+    },
+    {
+      "id": "judgement",
+      "name": "Judgement",
+      "number": 20,
+      "element": "fire",
+      "zodiac": "Pluto",
+      "keywords": [
+        "rebirth",
+        "calling",
+        "absolution",
+        "awakening",
+        "reckoning"
+      ],
+      "upright": "The trumpet sounds for your awakening. Answer your highest calling without apology. Past selves dissolve as you rise into who you were always meant to become.",
+      "reversed": "Self-judgment blocks your resurrection. Ignoring the call does not silence it. Forgive yourself and answer - the world needs what only you can offer.",
+      "essence": "The cosmic alarm clock that wakes the soul from its earthly sleep, calling all fragments home to wholeness."
+    },
+    {
+      "id": "the-world",
+      "name": "The World",
+      "number": 21,
+      "element": "earth",
+      "zodiac": "Saturn",
+      "keywords": [
+        "completion",
+        "integration",
+        "accomplishment",
+        "wholeness",
+        "cosmic consciousness"
+      ],
+      "upright": "The dance of completion spins you toward a new beginning. All lessons integrate into wisdom. You are whole, you are here, and the cosmos celebrates your journey.",
+      "reversed": "Almost complete but something remains unfinished. A lesson not yet integrated delays your graduation. Close the final loop before beginning anew.",
+      "essence": "The cosmic dancer at the center of everything, where ending and beginning lose all meaning in the eternal spiral of becoming."
+    }
+  ],
+  "minorArcana": [
+    {
+      "id": "ace-of-cups",
+      "name": "Ace of Cups",
+      "number": 1,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "new love",
+        "emotional awakening",
+        "intuition",
+        "compassion",
+        "creativity"
+      ],
+      "upright": "A new wellspring of emotion opens within you. Love in its purest form arrives - be it romantic, platonic, or self-love. Open your heart to receive.",
+      "reversed": "Emotional blockage or repressed feelings. The cup is offered but you turn away. Examine what fears prevent you from receiving love.",
+      "essence": "The first drop that becomes the ocean, where every love story begins with opening."
+    },
+    {
+      "id": "two-of-cups",
+      "name": "Two of Cups",
+      "number": 2,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "partnership",
+        "mutual attraction",
+        "unity",
+        "connection",
+        "harmony"
+      ],
+      "upright": "Two souls recognize their reflection in each other. Partnership deepens through mutual respect and genuine connection. Honor what flows between you.",
+      "reversed": "Imbalance in a relationship or broken trust. One gives while the other takes. Address the disharmony before the well runs dry.",
+      "essence": "The sacred mirror where two become one without losing themselves, and connection becomes communion."
+    },
+    {
+      "id": "three-of-cups",
+      "name": "Three of Cups",
+      "number": 3,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "celebration",
+        "friendship",
+        "community",
+        "joy",
+        "collaboration"
+      ],
+      "upright": "Raise your cup in celebration with those who truly see you. Community and friendship overflow with shared joy. Create together, celebrate together.",
+      "reversed": "Overindulgence or social exhaustion. Gossip poisons the well of friendship. Return to authentic connection over superficial gathering.",
+      "essence": "The joyful overflow when hearts gather without pretense, where celebration becomes prayer."
+    },
+    {
+      "id": "four-of-cups",
+      "name": "Four of Cups",
+      "number": 4,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "contemplation",
+        "apathy",
+        "reevaluation",
+        "meditation",
+        "dissatisfaction"
+      ],
+      "upright": "Boredom masks deeper longing. What is offered does not match what the soul truly craves. Look beyond the obvious gifts - something unseen waits for your attention.",
+      "reversed": "Emerging from emotional withdrawal. New appreciation for what was always there. Accept the unexpected offering with fresh eyes.",
+      "essence": "The still pool that reflects everything except what lies beneath, where discontent becomes the doorway to deeper desire."
+    },
+    {
+      "id": "five-of-cups",
+      "name": "Five of Cups",
+      "number": 5,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "grief",
+        "loss",
+        "regret",
+        "disappointment",
+        "mourning"
+      ],
+      "upright": "Grief deserves its full expression. Three cups have spilled, but two remain standing behind you. Honor what was lost, then turn to see what remains.",
+      "reversed": "Acceptance begins to dawn after mourning. The past loosens its grip. You are ready to pick up the remaining cups and walk forward.",
+      "essence": "The necessary tears that water new growth, where loss teaches us the true weight of what we loved."
+    },
+    {
+      "id": "six-of-cups",
+      "name": "Six of Cups",
+      "number": 6,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "nostalgia",
+        "innocence",
+        "reunion",
+        "childhood",
+        "generosity"
+      ],
+      "upright": "The past offers a gift to the present. Reconnect with innocence and simple joys. Nostalgia heals when it reminds us of who we were before the world complicated us.",
+      "reversed": "Living too much in the past or rose-tinted memories. Childhood wounds resurface for healing. Release idealized versions of what was to embrace what is.",
+      "essence": "The golden thread connecting who we were to who we are becoming, where memory becomes medicine."
+    },
+    {
+      "id": "seven-of-cups",
+      "name": "Seven of Cups",
+      "number": 7,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "fantasy",
+        "choices",
+        "illusion",
+        "imagination",
+        "wishful thinking"
+      ],
+      "upright": "Many visions shimmer before you, but not all are real. Distinguish true desire from escapist fantasy. Choose one cup and pour your whole self into it.",
+      "reversed": "Clarity emerges from the fog of too many options. Grounding fantasies into actionable reality. Choose and commit rather than forever dreaming.",
+      "essence": "The hall of mirrors where desire multiplies into infinity, and choosing becomes the only path to having."
+    },
+    {
+      "id": "eight-of-cups",
+      "name": "Eight of Cups",
+      "number": 8,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "walking away",
+        "disillusionment",
+        "seeking truth",
+        "departure",
+        "deeper meaning"
+      ],
+      "upright": "What once fulfilled you no longer does. Walk away from the incomplete tower of cups to seek something more real. This departure is not failure - it is evolution.",
+      "reversed": "Fear of leaving the familiar keeps you stuck. Returning to what you abandoned, or inability to move on. Ask honestly: is this contentment or just comfort?",
+      "essence": "The sacred walk into the unknown, where leaving behind becomes the bravest act of self-love."
+    },
+    {
+      "id": "nine-of-cups",
+      "name": "Nine of Cups",
+      "number": 9,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "wish fulfillment",
+        "contentment",
+        "satisfaction",
+        "luxury",
+        "gratitude"
+      ],
+      "upright": "The wish card smiles upon you. Emotional satisfaction and material comfort align. Savor this moment of fulfilled desire - you created this through your own becoming.",
+      "reversed": "Superficial satisfaction or smugness. Getting what you wanted only to find it hollow. True contentment requires depth, not just accumulation.",
+      "essence": "The full cup that overflows with earned joy, where gratitude becomes the highest form of magic."
+    },
+    {
+      "id": "ten-of-cups",
+      "name": "Ten of Cups",
+      "number": 10,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "emotional fulfillment",
+        "family harmony",
+        "divine love",
+        "bliss",
+        "homecoming"
+      ],
+      "upright": "The rainbow arcs over your emotional home. Deep fulfillment in love, family, and belonging. This is not perfection - it is wholeness, with all its beautiful imperfection.",
+      "reversed": "Broken harmony in family or relationships. The ideal image cracks to reveal reality underneath. True belonging requires accepting imperfection in those we love.",
+      "essence": "The complete rainbow of human emotional experience, where home is not a place but a state of the heart."
+    },
+    {
+      "id": "page-of-cups",
+      "name": "Page of Cups",
+      "number": 11,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "creative inspiration",
+        "intuitive messages",
+        "curiosity",
+        "sensitivity",
+        "new feelings"
+      ],
+      "upright": "A message from the emotional depths arrives unexpectedly. Stay open to creative surprises and intuitive nudges. Approach feelings with childlike curiosity rather than adult judgment.",
+      "reversed": "Emotional immaturity or creative blocks. Ignoring intuitive messages or drowning in sensitivity. Ground your feelings before they sweep you into fantasy.",
+      "essence": "The young mystic who finds a fish in their cup and greets the impossible with wonder rather than fear."
+    },
+    {
+      "id": "knight-of-cups",
+      "name": "Knight of Cups",
+      "number": 12,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "romance",
+        "charm",
+        "imagination",
+        "following the heart",
+        "idealism"
+      ],
+      "upright": "Follow your heart with graceful pursuit. The romantic quest calls you forward. Lead with charm and emotional intelligence, but ensure your vision matches reality.",
+      "reversed": "Moodiness or unrealistic romantic ideals. Charm without substance or following feelings without discernment. Ground your quest in truth, not just beauty.",
+      "essence": "The poet-warrior who rides toward love with open visor, where vulnerability becomes the sharpest blade."
+    },
+    {
+      "id": "queen-of-cups",
+      "name": "Queen of Cups",
+      "number": 13,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "emotional intelligence",
+        "compassion",
+        "intuition",
+        "nurturing",
+        "psychic ability"
+      ],
+      "upright": "You hold the cup of empathy without drowning in it. Nurture others from your overflow, not your reserves. Your emotional wisdom guides like moonlight on water.",
+      "reversed": "Emotional overwhelm or codependency. Absorbing others feelings as your own. Seal your cup before pouring for others - compassion requires boundaries.",
+      "essence": "The deep ocean that holds all feeling without being moved from center, where empathy becomes wisdom."
+    },
+    {
+      "id": "king-of-cups",
+      "name": "King of Cups",
+      "number": 14,
+      "suit": "cups",
+      "element": "water",
+      "keywords": [
+        "emotional mastery",
+        "diplomacy",
+        "calm authority",
+        "wisdom",
+        "generosity"
+      ],
+      "upright": "Master of the emotional realm, you command feeling without being commanded by it. Lead with compassionate authority. Your calm steadiness anchors others in stormy seas.",
+      "reversed": "Emotional manipulation or suppressed feelings. Cold authority that lacks genuine warmth. Power without vulnerability is just control wearing a crown.",
+      "essence": "The lighthouse in the storm whose light comes not from fire but from mastered depths, where feeling serves rather than rules."
+    },
+    {
+      "id": "ace-of-pentacles",
+      "name": "Ace of Pentacles",
+      "number": 1,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "new opportunity",
+        "prosperity",
+        "manifestation",
+        "abundance",
+        "potential"
+      ],
+      "upright": "A golden seed of opportunity appears. Plant it with care and patience - this beginning holds material promise. The universe offers tangible abundance to those ready to receive and work.",
+      "reversed": "Missed opportunity or poor planning. Material potential squandered through lack of follow-through. Reassess your foundation before building.",
+      "essence": "The first coin that falls from the cosmic mint, where potential crystallizes into tangible form."
+    },
+    {
+      "id": "two-of-pentacles",
+      "name": "Two of Pentacles",
+      "number": 2,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "balance",
+        "adaptability",
+        "juggling",
+        "flexibility",
+        "time management"
+      ],
+      "upright": "Dance between demands with grace. Life requires juggling multiple priorities - find your rhythm rather than seeking stillness. Adaptability is its own form of mastery.",
+      "reversed": "Overwhelm from too many commitments. Dropping balls trying to keep everything airborne. Simplify before the dance becomes a disaster.",
+      "essence": "The eternal juggler who proves that balance is not stillness but graceful motion between demands."
+    },
+    {
+      "id": "three-of-pentacles",
+      "name": "Three of Pentacles",
+      "number": 3,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "teamwork",
+        "craftsmanship",
+        "collaboration",
+        "skill",
+        "planning"
+      ],
+      "upright": "Mastery meets collaboration. Your skills are recognized and valued within a greater effort. Work with others whose expertise complements your own - the cathedral needs many builders.",
+      "reversed": "Poor teamwork or lack of recognition. Working alone when collaboration is needed, or group effort lacking direction. Align skills with shared vision.",
+      "essence": "The master craftsman who knows that the greatest works require many hands guided by shared purpose."
+    },
+    {
+      "id": "four-of-pentacles",
+      "name": "Four of Pentacles",
+      "number": 4,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "security",
+        "possessiveness",
+        "control",
+        "stability",
+        "conservatism"
+      ],
+      "upright": "Hold what you have built with appropriate care, but not with a death grip. Security comes from wise stewardship, not fearful hoarding. Know the difference between protecting and imprisoning.",
+      "reversed": "Letting go of material attachment or financial fear. Generosity after a period of holding too tight. Release control to allow flow.",
+      "essence": "The guardian who must learn that true wealth flows and what is clutched too tightly turns to dust."
+    },
+    {
+      "id": "five-of-pentacles",
+      "name": "Five of Pentacles",
+      "number": 5,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "hardship",
+        "loss",
+        "isolation",
+        "worry",
+        "poverty"
+      ],
+      "upright": "Material struggle or feeling left out in the cold. Help exists but pride or shame may blind you to it. The stained glass window glows warm - look up and walk toward the door.",
+      "reversed": "Recovery from financial hardship begins. Accepting help after struggling alone. The worst has passed and rebuilding can begin in earnest.",
+      "essence": "The necessary winter that teaches us warmth is a gift, and that asking for help is its own form of strength."
+    },
+    {
+      "id": "six-of-pentacles",
+      "name": "Six of Pentacles",
+      "number": 6,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "generosity",
+        "charity",
+        "giving and receiving",
+        "balance",
+        "sharing"
+      ],
+      "upright": "Abundance shared multiplies. Whether giving or receiving, do so with grace and without power imbalance. Generosity that empowers rather than creates dependency is true wealth.",
+      "reversed": "Strings attached to generosity or unfair distribution. One-sided giving that creates imbalance. Examine the power dynamics within your exchanges.",
+      "essence": "The scales of giving where true generosity empowers rather than diminishes, and receiving is also an act of grace."
+    },
+    {
+      "id": "seven-of-pentacles",
+      "name": "Seven of Pentacles",
+      "number": 7,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "patience",
+        "assessment",
+        "investment",
+        "perseverance",
+        "long-term vision"
+      ],
+      "upright": "Pause to assess what your efforts have grown. Not all fruit ripens at the same pace. Patience with your harvest - what seems slow is simply taking the time needed to bear full fruit.",
+      "reversed": "Impatience with results or wasted investment. Effort without strategy yields diminishing returns. Reassess whether this garden is worth continued tending.",
+      "essence": "The patient farmer who trusts the seasons, knowing that watching the pot never makes it boil faster."
+    },
+    {
+      "id": "eight-of-pentacles",
+      "name": "Eight of Pentacles",
+      "number": 8,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "diligence",
+        "craftsmanship",
+        "skill development",
+        "dedication",
+        "mastery"
+      ],
+      "upright": "Master your craft through devoted repetition. Each pentacle carved is better than the last. Excellence is not talent - it is persistence applied with love and attention to detail.",
+      "reversed": "Perfectionism that prevents completion, or mindless work without growth. Drudgery replaces devotion. Reconnect with why you began this work.",
+      "essence": "The apprentice who becomes master one careful stroke at a time, where devotion to craft becomes devotion to self."
+    },
+    {
+      "id": "nine-of-pentacles",
+      "name": "Nine of Pentacles",
+      "number": 9,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "self-sufficiency",
+        "luxury",
+        "accomplishment",
+        "discipline",
+        "independence"
+      ],
+      "upright": "You built this garden with your own hands. Enjoy the fruits of disciplined effort and self-reliance. Independence earned through dedication is the sweetest luxury of all.",
+      "reversed": "Over-reliance on material comfort or financial setback after success. Self-sufficiency tipping into isolation. Wealth means nothing without connection.",
+      "essence": "The self-made sovereign in their private garden, where independence becomes the greatest luxury earned through patient discipline."
+    },
+    {
+      "id": "ten-of-pentacles",
+      "name": "Ten of Pentacles",
+      "number": 10,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "legacy",
+        "wealth",
+        "inheritance",
+        "family",
+        "establishment"
+      ],
+      "upright": "Generational abundance and lasting legacy. What you build now echoes through time. Consider what you leave behind - true wealth is what endures beyond a single lifetime.",
+      "reversed": "Family financial disputes or lost inheritance. Legacy crumbling or wealth without purpose. Material success means nothing if the foundation of values is hollow.",
+      "essence": "The ancient tree whose roots and branches connect generations, where true wealth is measured in what outlives us."
+    },
+    {
+      "id": "page-of-pentacles",
+      "name": "Page of Pentacles",
+      "number": 11,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "ambition",
+        "study",
+        "new venture",
+        "practicality",
+        "opportunity"
+      ],
+      "upright": "A new practical venture or course of study calls to you. Approach material goals with fresh enthusiasm and willingness to learn. Plant seeds of future abundance with youthful dedication.",
+      "reversed": "Lack of focus or impractical dreams. Procrastination on material goals. The plan needs grounding before it can grow into something real.",
+      "essence": "The eager student who holds the golden coin of possibility, examining it from every angle before investing."
+    },
+    {
+      "id": "knight-of-pentacles",
+      "name": "Knight of Pentacles",
+      "number": 12,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "reliability",
+        "hard work",
+        "routine",
+        "patience",
+        "thoroughness"
+      ],
+      "upright": "Steady progress through unwavering commitment. Not the fastest knight, but the most dependable. Your methodical approach builds what flashier efforts cannot sustain.",
+      "reversed": "Stubbornness disguised as dedication, or laziness masked as patience. Stagnation through excessive caution. Sometimes the slow road is just the wrong road.",
+      "essence": "The steadfast rider whose tortoise pace builds empires that the hare can only dream of."
+    },
+    {
+      "id": "queen-of-pentacles",
+      "name": "Queen of Pentacles",
+      "number": 13,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "nurturing abundance",
+        "practicality",
+        "comfort",
+        "financial security",
+        "generosity"
+      ],
+      "upright": "Create abundance that nurtures all who enter your realm. Practical wisdom and generous spirit combine to build a life of sustainable comfort. You make prosperity feel like home.",
+      "reversed": "Work-life imbalance or neglecting practical needs for others. Financial anxiety despite abundance. Nurture yourself with the same generosity you offer others.",
+      "essence": "The earth mother whose practical magic turns houses into homes and resources into nourishment for all."
+    },
+    {
+      "id": "king-of-pentacles",
+      "name": "King of Pentacles",
+      "number": 14,
+      "suit": "pentacles",
+      "element": "earth",
+      "keywords": [
+        "wealth",
+        "business mastery",
+        "discipline",
+        "abundance",
+        "reliability"
+      ],
+      "upright": "Material mastery through disciplined vision. You have built your kingdom coin by coin with patience and wisdom. Lead your material realm with generosity and grounded authority.",
+      "reversed": "Greed or materialism without soul. Business success at the cost of everything else. A kingdom of gold is still empty without warmth within its walls.",
+      "essence": "The master builder whose wealth serves rather than rules, proving that true abundance is measured in what you create for others."
+    },
+    {
+      "id": "ace-of-swords",
+      "name": "Ace of Swords",
+      "number": 1,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "clarity",
+        "breakthrough",
+        "truth",
+        "new idea",
+        "mental force"
+      ],
+      "upright": "A blade of pure clarity cuts through confusion. A breakthrough in understanding arrives. Wield this new mental power with precision - truth is both weapon and liberation.",
+      "reversed": "Clouded thinking or misused intellect. A breakthrough blocked by confusion or willful ignorance. Sharpen your mind before attempting to cut through complexity.",
+      "essence": "The first breath of clarity that splits the fog, where truth becomes a blade sharp enough to free or wound."
+    },
+    {
+      "id": "two-of-swords",
+      "name": "Two of Swords",
+      "number": 2,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "indecision",
+        "stalemate",
+        "avoidance",
+        "difficult choice",
+        "denial"
+      ],
+      "upright": "Blindfolded between two truths, you refuse to choose. But not choosing is itself a choice. Remove the blindfold - the discomfort of seeing clearly is less than the pain of prolonged denial.",
+      "reversed": "Information surfaces that breaks the stalemate. Forced decision after prolonged avoidance. The blindfold falls whether you are ready or not.",
+      "essence": "The suspended moment between two truths where the blindfold of indecision becomes heavier than either blade."
+    },
+    {
+      "id": "three-of-swords",
+      "name": "Three of Swords",
+      "number": 3,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "heartbreak",
+        "sorrow",
+        "grief",
+        "painful truth",
+        "emotional pain"
+      ],
+      "upright": "Three truths pierce the heart simultaneously. This pain is not punishment - it is the surgery that removes what was already killing you slowly. Let the tears cleanse what words could not.",
+      "reversed": "Healing begins after heartbreak. Processing grief and moving toward recovery. The swords withdraw, leaving scars that become wisdom.",
+      "essence": "The necessary pain that proves the heart was real, where grief becomes the price we pay for having loved at all."
+    },
+    {
+      "id": "four-of-swords",
+      "name": "Four of Swords",
+      "number": 4,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "rest",
+        "recovery",
+        "contemplation",
+        "solitude",
+        "restoration"
+      ],
+      "upright": "The warrior must rest to fight again. Mental exhaustion demands a sacred pause. Retreat is not defeat - it is strategic restoration. Let your mind lie still in the temple of silence.",
+      "reversed": "Restlessness or forced return before recovery is complete. Burnout ignored becomes breakdown. Honor your need for mental rest even when the world demands action.",
+      "essence": "The sacred rest between battles where the mind heals in the temple of voluntary stillness."
+    },
+    {
+      "id": "five-of-swords",
+      "name": "Five of Swords",
+      "number": 5,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "conflict",
+        "defeat",
+        "winning at a cost",
+        "hostility",
+        "betrayal"
+      ],
+      "upright": "A hollow victory leaves more enemies than allies. Winning this battle may lose the war. Consider whether the prize justifies the bridges burned to claim it.",
+      "reversed": "Moving past conflict and choosing peace over being right. Learning from defeat without bitterness. Sometimes the wisest sword is the one laid down.",
+      "essence": "The bitter taste of a victory that cost more than defeat ever would, where winning becomes its own punishment."
+    },
+    {
+      "id": "six-of-swords",
+      "name": "Six of Swords",
+      "number": 6,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "transition",
+        "moving on",
+        "recovery",
+        "journey",
+        "mental shift"
+      ],
+      "upright": "The boat carries you from troubled waters toward calmer shores. This transition may feel melancholy, but every stroke takes you further from what no longer serves. Trust the crossing.",
+      "reversed": "Inability to move on or resistance to necessary transition. Returning to troubled waters out of familiarity. The far shore exists - keep rowing.",
+      "essence": "The quiet crossing from storm to stillness, where leaving becomes arriving and grief becomes the fare for passage."
+    },
+    {
+      "id": "seven-of-swords",
+      "name": "Seven of Swords",
+      "number": 7,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "deception",
+        "strategy",
+        "stealth",
+        "cunning",
+        "self-deception"
+      ],
+      "upright": "Strategy or subterfuge - the line is thin. Sometimes unconventional approaches are necessary, but examine your motives carefully. Are you being clever or just avoiding honest confrontation?",
+      "reversed": "Deception exposed or conscience catching up. Getting caught in your own web. Choose transparency over cleverness - the truth you avoid will find you regardless.",
+      "essence": "The trickster who steals from himself without knowing it, where cleverness without integrity becomes its own trap."
+    },
+    {
+      "id": "eight-of-swords",
+      "name": "Eight of Swords",
+      "number": 8,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "restriction",
+        "imprisonment",
+        "powerlessness",
+        "self-limiting beliefs",
+        "victim mentality"
+      ],
+      "upright": "You feel trapped, but look closely - the bindings are loose and the swords form a cage with gaps. Your prison is mental, built from beliefs about your own powerlessness. Open your eyes.",
+      "reversed": "Breaking free from self-imposed limitations. Realizing your power was never truly taken. The cage dissolves when you stop believing in walls that were never there.",
+      "essence": "The illusion of imprisonment where every bar is a belief and the door was never locked."
+    },
+    {
+      "id": "nine-of-swords",
+      "name": "Nine of Swords",
+      "number": 9,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "anxiety",
+        "nightmares",
+        "despair",
+        "mental anguish",
+        "worry"
+      ],
+      "upright": "The darkest hour of the mind, where fear multiplies in the silence of 3 AM. These swords are thoughts, not truths. What haunts you in darkness often dissolves in the light of day and action.",
+      "reversed": "The worst anxiety begins to ease. Reaching out for help with mental burden. Learning that shared fear loses half its weight. Dawn is closer than you think.",
+      "essence": "The long dark night of the mind where thoughts become blades and worry becomes its own wound."
+    },
+    {
+      "id": "ten-of-swords",
+      "name": "Ten of Swords",
+      "number": 10,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "rock bottom",
+        "ending",
+        "betrayal",
+        "defeat",
+        "new dawn"
+      ],
+      "upright": "The final sword falls and the worst is over. This absolute ending is also the absolute beginning. You cannot be stabbed again - there is nowhere to go but up. Dawn breaks on the horizon.",
+      "reversed": "Refusing to accept an ending or surviving what should have destroyed you. Rising from rock bottom with hard-won wisdom. The worst is truly behind you now.",
+      "essence": "The paradox of total defeat becoming total freedom, where hitting bottom becomes the foundation for rising."
+    },
+    {
+      "id": "page-of-swords",
+      "name": "Page of Swords",
+      "number": 11,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "curiosity",
+        "mental agility",
+        "new ideas",
+        "communication",
+        "vigilance"
+      ],
+      "upright": "A sharp young mind eager to cut through pretense. Approach challenges with intellectual curiosity and quick thinking. Speak truth clearly, but learn when silence is sharper than words.",
+      "reversed": "Gossip, scattered thinking, or all talk without action. Mental energy without direction cuts carelessly. Focus your blade before swinging.",
+      "essence": "The young wind that cuts in every direction at once, learning that precision matters more than speed."
+    },
+    {
+      "id": "knight-of-swords",
+      "name": "Knight of Swords",
+      "number": 12,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "ambition",
+        "action",
+        "speed",
+        "determination",
+        "intellectual pursuit"
+      ],
+      "upright": "Charge forward with intellectual conviction and unstoppable momentum. Your mind moves faster than most can follow. Channel this fierce mental energy toward worthy targets with precision.",
+      "reversed": "Reckless thinking or hasty action without foresight. Speed without direction is just chaos. Slow your charge long enough to aim properly.",
+      "essence": "The storm on horseback who cuts through hesitation like wind through fog, where speed becomes destiny."
+    },
+    {
+      "id": "queen-of-swords",
+      "name": "Queen of Swords",
+      "number": 13,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "clear thinking",
+        "independence",
+        "direct communication",
+        "perceptiveness",
+        "boundaries"
+      ],
+      "upright": "See clearly and speak directly. Your perceptive mind cuts through emotional fog to find truth. Set boundaries with compassionate firmness - clarity is a gift, not cruelty.",
+      "reversed": "Coldness or bitterness masquerading as clarity. Using intellect as armor against vulnerability. Sharp words wound when disconnected from the heart that guides them.",
+      "essence": "The clear sky after the storm whose truth illuminates without burning, where boundaries become acts of love."
+    },
+    {
+      "id": "king-of-swords",
+      "name": "King of Swords",
+      "number": 14,
+      "suit": "swords",
+      "element": "air",
+      "keywords": [
+        "intellectual authority",
+        "truth",
+        "clear judgment",
+        "ethics",
+        "analytical power"
+      ],
+      "upright": "Command through clarity of thought and ethical judgment. Your word is law because it is true, not because it is loud. Lead with the mind that sees all angles and chooses wisely.",
+      "reversed": "Tyranny of intellect or cold manipulation. Power without mercy or judgment without compassion. The sharpest mind is useless without the heart to guide it.",
+      "essence": "The sovereign mind whose authority comes not from force but from the undeniable weight of clear truth."
+    },
+    {
+      "id": "ace-of-wands",
+      "name": "Ace of Wands",
+      "number": 1,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "inspiration",
+        "new venture",
+        "creative spark",
+        "potential",
+        "enthusiasm"
+      ],
+      "upright": "A bolt of pure creative fire ignites within you. This spark of inspiration demands action. Seize this energy before it fades - begin now, refine later. The universe offers ignition.",
+      "reversed": "Creative blocks or false starts. The spark fizzles before catching flame. Clear internal resistance before attempting to light the fire again.",
+      "essence": "The first flame struck from cosmic flint, where inspiration becomes the fuel for every journey that matters."
+    },
+    {
+      "id": "two-of-wands",
+      "name": "Two of Wands",
+      "number": 2,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "planning",
+        "future vision",
+        "decisions",
+        "discovery",
+        "progress"
+      ],
+      "upright": "The world lies before you as you hold your vision in one hand and possibility in the other. Plan your expansion with bold ambition. The map is drawn - now choose your direction.",
+      "reversed": "Fear of the unknown prevents expansion. Over-planning replaces action. The world shrinks when you refuse to step beyond familiar walls.",
+      "essence": "The visionary at the crossroads holding the whole world like a promise, where planning becomes the bridge between dream and destiny."
+    },
+    {
+      "id": "three-of-wands",
+      "name": "Three of Wands",
+      "number": 3,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "expansion",
+        "foresight",
+        "overseas opportunities",
+        "progress",
+        "exploration"
+      ],
+      "upright": "Your ships have launched and the horizon beckons. Expansion is underway - trust what you set in motion. The seeds of past planning now sail toward distant shores of possibility.",
+      "reversed": "Delays in expected progress or fear of expansion. Ships sent but not yet returned. Patience with your ventures - not all winds blow on your schedule.",
+      "essence": "The watcher on the cliff whose patience is rewarded by sails appearing on the horizon of their own making."
+    },
+    {
+      "id": "four-of-wands",
+      "name": "Four of Wands",
+      "number": 4,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "celebration",
+        "homecoming",
+        "harmony",
+        "community",
+        "milestone"
+      ],
+      "upright": "A milestone achieved deserves its celebration. Community gathers in joy around what you have built. This is not the end but a beautiful waypoint - honor it fully.",
+      "reversed": "Delayed celebration or instability within community. The party lacks genuine joy. Ensure the foundation supports the revelry before dancing on it.",
+      "essence": "The harvest festival where community gathers to honor what grows when people build together with shared fire."
+    },
+    {
+      "id": "five-of-wands",
+      "name": "Five of Wands",
+      "number": 5,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "competition",
+        "conflict",
+        "disagreement",
+        "tension",
+        "challenge"
+      ],
+      "upright": "Creative friction sparks growth when channeled well. Competition sharpens your edge if you fight fair. Not all conflict is destructive - some fires forge rather than consume.",
+      "reversed": "Avoiding necessary confrontation or exhaustion from constant battling. End the fight or commit fully - half-hearted conflict helps no one.",
+      "essence": "The creative crucible where friction between forces generates the heat needed to forge something new."
+    },
+    {
+      "id": "six-of-wands",
+      "name": "Six of Wands",
+      "number": 6,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "victory",
+        "recognition",
+        "success",
+        "triumph",
+        "public acclaim"
+      ],
+      "upright": "Victory rides in and the crowd acknowledges your achievement. Accept recognition with grace - you earned this moment. Let success fuel further ambition rather than breed complacency.",
+      "reversed": "Private success without public recognition, or ego inflated by hollow praise. True victory needs no audience. Let your work speak louder than applause.",
+      "essence": "The triumphant return where the fire of achievement is witnessed and honored by those who understand its cost."
+    },
+    {
+      "id": "seven-of-wands",
+      "name": "Seven of Wands",
+      "number": 7,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "defiance",
+        "courage",
+        "perseverance",
+        "standing ground",
+        "challenge"
+      ],
+      "upright": "Hold your high ground against those who challenge your position. You earned this elevation - defend it with the fire of conviction. Not everyone who reaches for your crown deserves it.",
+      "reversed": "Overwhelmed by opposition or giving up ground unnecessarily. Exhaustion from constant defense. Sometimes retreat is strategic, not cowardly.",
+      "essence": "The lone flame on the hilltop that refuses to be extinguished by the winds of opposition."
+    },
+    {
+      "id": "eight-of-wands",
+      "name": "Eight of Wands",
+      "number": 8,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "speed",
+        "movement",
+        "swift action",
+        "air travel",
+        "momentum"
+      ],
+      "upright": "Everything accelerates. Messages fly, plans launch, and momentum carries you forward with exhilarating speed. Remove obstacles to flow and let the arrows of intention find their marks.",
+      "reversed": "Delays, frustration, and scattered energy. Arrows launched without aim land nowhere useful. Patience - the speed will return when alignment is restored.",
+      "essence": "The moment when all arrows fly true and the universe removes every obstacle between intention and manifestation."
+    },
+    {
+      "id": "nine-of-wands",
+      "name": "Nine of Wands",
+      "number": 9,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "resilience",
+        "persistence",
+        "last stand",
+        "courage",
+        "boundaries"
+      ],
+      "upright": "Battered but unbroken, you stand your ground one final time. The end of this trial is closer than exhaustion suggests. Draw on reserves you did not know you had - one more push.",
+      "reversed": "Paranoia or inability to lower defenses. Battle fatigue that distorts perception of threat. Not everything coming toward you is an enemy. Rest before your final stand.",
+      "essence": "The wounded warrior who finds one more flame within when all others have gone dark, where resilience becomes its own reward."
+    },
+    {
+      "id": "ten-of-wands",
+      "name": "Ten of Wands",
+      "number": 10,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "burden",
+        "responsibility",
+        "hard work",
+        "overwhelm",
+        "carrying too much"
+      ],
+      "upright": "You carry more than any one person should. Success has become its own burden. Delegate, release, or restructure before the weight of all these wands crushes the fire that lit them.",
+      "reversed": "Learning to delegate or releasing unnecessary burdens. The collapse of over-commitment leads to wiser distribution. Put down what is not yours to carry.",
+      "essence": "The fire that tries to burn in ten directions at once and learns that focus, not spread, creates true warmth."
+    },
+    {
+      "id": "page-of-wands",
+      "name": "Page of Wands",
+      "number": 11,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "exploration",
+        "excitement",
+        "new passion",
+        "free spirit",
+        "discovery"
+      ],
+      "upright": "A new passion ignites with youthful enthusiasm. Explore without needing to know the destination. This creative excitement is meant to be followed, not analyzed.",
+      "reversed": "Lack of direction or commitment phobia. Excitement without follow-through burns bright but brief. Channel your spark before it scatters into smoke.",
+      "essence": "The young flame that dances with every breeze, where curiosity becomes the compass and enthusiasm the fuel."
+    },
+    {
+      "id": "knight-of-wands",
+      "name": "Knight of Wands",
+      "number": 12,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "adventure",
+        "energy",
+        "passion",
+        "impulsiveness",
+        "action"
+      ],
+      "upright": "Charge forward with passionate intensity. Your fearless energy attracts adventure and opportunity. Move boldly but not blindly - the fastest horse still needs a rider with vision.",
+      "reversed": "Reckless action or scattered energy. Passion without direction burns everything including yourself. Aim your fire before releasing it on the world.",
+      "essence": "The blazing comet that tears across the sky, proving that audacity and passion can bend the arc of fate."
+    },
+    {
+      "id": "queen-of-wands",
+      "name": "Queen of Wands",
+      "number": 13,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "confidence",
+        "determination",
+        "warmth",
+        "vibrance",
+        "leadership"
+      ],
+      "upright": "Radiate with magnetic confidence that draws others into your orbit. Lead with warmth and fierce determination. Your creative fire inspires without consuming - be the sun, not the wildfire.",
+      "reversed": "Self-doubt beneath a confident exterior, or dominance mistaken for leadership. Jealousy or burn-out dims your natural radiance. Tend your inner flame first.",
+      "essence": "The sovereign fire that warms without burning, whose confidence comes not from proving but from simply being."
+    },
+    {
+      "id": "king-of-wands",
+      "name": "King of Wands",
+      "number": 14,
+      "suit": "wands",
+      "element": "fire",
+      "keywords": [
+        "visionary leadership",
+        "entrepreneurship",
+        "boldness",
+        "charisma",
+        "big picture"
+      ],
+      "upright": "Lead with the fire of vision and the wisdom to sustain it. Your charismatic boldness inspires others to follow. Think big, act decisively, and trust your ability to turn vision into empire.",
+      "reversed": "Impulsiveness or tyrannical leadership. Vision without patience or charisma without substance. The greatest fire is useless if it burns those it should warm.",
+      "essence": "The master of flame who builds empires from sparks, where visionary boldness meets the patience to let great things grow."
+    }
+  ],
+  "elementGuidance": {
+    "air": "Name the thought clearly. Air cards ask you to examine your beliefs, communicate your truth, and cut through confusion with the blade of clarity.",
+    "earth": "Choose one grounded action. Earth cards call you to manifest, build, tend, and create tangible results through patient dedicated effort.",
+    "fire": "Move with courage and creative force. Fire cards ignite your passion, ambition, and will to act. Follow the spark before overthinking extinguishes it.",
+    "water": "Let the feeling be honest. Water cards flow through your emotional landscape, asking you to feel deeply, connect authentically, and trust your intuition.",
+    "spirit": "Listen for the pattern beneath the patterns. Spirit cards transcend the elemental and speak to your soul journey through the greater cosmic mystery."
+  },
+  "spreads": {
+    "single": {
+      "name": "Single Card",
+      "positions": [
+        "Present Energy"
+      ],
+      "description": "A focused pull for immediate guidance on the energy surrounding you right now."
+    },
+    "three-card": {
+      "name": "Three Card Spread",
+      "positions": [
+        "Past",
+        "Present",
+        "Future"
+      ],
+      "description": "The classic timeline spread revealing where you have been, where you are, and where the cosmic current carries you."
+    },
+    "relationship": {
+      "name": "Relationship Spread",
+      "positions": [
+        "You",
+        "The Other",
+        "The Connection",
+        "The Challenge",
+        "The Potential"
+      ],
+      "description": "Illuminates the dynamics between two souls, revealing hidden currents and possible futures."
+    },
+    "celtic-cross": {
+      "name": "Celtic Cross",
+      "positions": [
+        "Present Situation",
+        "Immediate Challenge",
+        "Distant Past",
+        "Recent Past",
+        "Best Possible Outcome",
+        "Immediate Future",
+        "Your Approach",
+        "External Influences",
+        "Hopes and Fears",
+        "Final Outcome"
+      ],
+      "description": "The grand spread of Western tarot tradition. Ten cards revealing the full landscape of your question with cosmic depth and nuance."
+    }
+  }
+}
