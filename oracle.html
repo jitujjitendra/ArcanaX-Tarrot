@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Oracle - ArcanaX Cosmic Destiny</title>
+  <meta name="description" content="Ask the Smart Oracle your deepest questions. AI-powered tarot guidance with moon phase awareness and personalized responses.">
+  <link rel="stylesheet" href="css/arcanax-pages.css">
+  <style>
+    .oracle-page { min-height: 100vh; display: flex; flex-direction: column; }
+    .oracle-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--ax-border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+    .oracle-header h1 { font-family: var(--ax-font-display); font-size: 1.5rem; margin: 0; }
+    .moon-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--ax-accent-soft); border: 1px solid var(--ax-border-accent); border-radius: 2rem; padding: 0.35rem 0.75rem; font-size: 0.8rem; color: var(--ax-secondary); }
+    .oracle-body { flex: 1; display: flex; overflow: hidden; }
+    .chat-area { flex: 1; display: flex; flex-direction: column; }
+    .messages { flex: 1; overflow-y: auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .msg { max-width: 85%; padding: 0.85rem 1.1rem; border-radius: var(--ax-radius); line-height: 1.55; animation: fadeIn 0.3s ease; }
+    .msg-user { align-self: flex-end; background: var(--ax-accent-soft); border: 1px solid var(--ax-border-accent); color: var(--ax-text); }
+    .msg-oracle { align-self: flex-start; background: var(--ax-bg-card); border: 1px solid var(--ax-border); color: var(--ax-text); }
+    .msg-oracle .oracle-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ax-gold); margin-bottom: 0.3rem; }
+    .msg-card { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; padding: 0.5rem; background: rgba(255,215,0,0.05); border-radius: 0.5rem; border: 1px solid var(--ax-gold-soft); }
+    .msg-card svg { width: 50px; height: 75px; border-radius: 4px; flex-shrink: 0; }
+    .msg-card-info { font-size: 0.85rem; }
+    .msg-card-name { color: var(--ax-gold); font-weight: 600; }
+    .suggestions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+    .suggestion-btn { background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: 1rem; padding: 0.3rem 0.7rem; font-size: 0.75rem; color: var(--ax-text-muted); cursor: pointer; transition: all 0.2s; }
+    .suggestion-btn:hover { border-color: var(--ax-accent); color: var(--ax-accent); }
+    .input-area { padding: 1rem 1.25rem; border-top: 1px solid var(--ax-border); display: flex; gap: 0.5rem; }
+    .input-area input { flex: 1; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 0.75rem 1rem; color: var(--ax-text); font-size: 1rem; outline: none; transition: border-color 0.2s; }
+    .input-area input:focus { border-color: var(--ax-accent); }
+    .input-area input::placeholder { color: var(--ax-text-muted); }
+    .send-btn { background: linear-gradient(135deg, var(--ax-accent), #8060cc); border: none; border-radius: var(--ax-radius); padding: 0.75rem 1.25rem; color: #fff; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .send-btn:hover { opacity: 0.85; }
+    .sidebar { width: 280px; border-left: 1px solid var(--ax-border); padding: 1rem; overflow-y: auto; display: none; }
+    @media (min-width: 900px) { .sidebar { display: block; } }
+    .sidebar h3 { font-family: var(--ax-font-display); font-size: 1.1rem; margin: 0 0 0.75rem; color: var(--ax-gold); }
+    .sidebar-section { margin-bottom: 1.5rem; }
+    .recent-item { padding: 0.5rem; border-radius: 0.5rem; margin-bottom: 0.4rem; font-size: 0.8rem; color: var(--ax-text-muted); background: var(--ax-bg-surface); border: 1px solid var(--ax-border); cursor: pointer; transition: border-color 0.2s; }
+    .recent-item:hover { border-color: var(--ax-accent); }
+    .nav-link { display: inline-block; padding: 0.5rem 1rem; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); color: var(--ax-accent); text-decoration: none; font-size: 0.85rem; transition: border-color 0.2s; }
+    .nav-link:hover { border-color: var(--ax-accent); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .typing-dots { display: inline-flex; gap: 3px; padding: 0.5rem 0; }
+    .typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--ax-accent); animation: dotPulse 1.2s infinite; }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dotPulse { 0%, 60%, 100% { opacity: 0.3; } 30% { opacity: 1; } }
+  </style>
+</head>
+<body class="ax-page oracle-page">
+  <header class="oracle-header">
+    <div style="display:flex;align-items:center;gap:1rem">
+      <a href="index.html" class="nav-link">&larr; Home</a>
+      <h1 class="ax-text-gradient">Smart Oracle</h1>
+    </div>
+    <div class="moon-badge" id="moonBadge">
+      <span id="moonEmoji"></span>
+      <span id="moonText"></span>
+    </div>
+  </header>
+
+  <div class="oracle-body">
+    <div class="chat-area">
+      <div class="messages" id="messages">
+        <div class="msg msg-oracle">
+          <div class="oracle-label">Cosmic Oracle</div>
+          <p>Greetings, seeker. I am the ArcanaX Oracle, attuned to the cosmic currents and the wisdom of the tarot. Ask me anything about love, career, health, destiny, or any matter that weighs upon your heart.</p>
+          <div class="suggestions" id="initialSuggestions">
+            <button class="suggestion-btn" onclick="askSuggestion(this)">Will I find love?</button>
+            <button class="suggestion-btn" onclick="askSuggestion(this)">What does my career hold?</button>
+            <button class="suggestion-btn" onclick="askSuggestion(this)">What is my life purpose?</button>
+            <button class="suggestion-btn" onclick="askSuggestion(this)">Should I make this change?</button>
+          </div>
+        </div>
+      </div>
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="Ask the Oracle your question..." autocomplete="off">
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">Ask</button>
+      </div>
+    </div>
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Moon Phase</h3>
+        <div id="moonDetails"></div>
+      </div>
+      <div class="sidebar-section">
+        <h3>Recent Questions</h3>
+        <div id="recentQuestions"></div>
+      </div>
+      <div class="sidebar-section">
+        <a href="journal.html" class="nav-link">View Reading Journal</a>
+      </div>
+    </aside>
+  </div>
+
+  <script src="assets/tarot-engine.js"></script>
+  <script src="js/card-art-generator.js"></script>
+  <script src="js/smart-oracle.js"></script>
+  <script src="js/moon-phase.js"></script>
+  <script>
+    (function() {
+      var deck = null;
+      var recentQuestions = [];
+
+      // Initialize
+      function init() {
+        // Load deck
+        fetch('assets/tarot-deck.json')
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            ArcanaXEngine.loadDeck(data);
+            deck = ArcanaXEngine.getDeck();
+          })
+          .catch(function() {
+            console.warn('Could not load tarot deck');
+          });
+
+        // Moon phase
+        var moon = MoonPhase.getMoonPhase(new Date());
+        document.getElementById('moonEmoji').textContent = moon.emoji;
+        document.getElementById('moonText').textContent = moon.phase.replace('-', ' ');
+
+        var guidance = MoonPhase.getTarotMoonGuidance(moon.phase);
+        var moonDetails = document.getElementById('moonDetails');
+        moonDetails.innerHTML = '<p style="font-size:0.8rem;color:var(--ax-text-muted);margin:0">' +
+          '<strong style="color:var(--ax-secondary)">' + guidance.title + '</strong><br>' +
+          guidance.guidance + '</p>';
+
+        // Enter key
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') sendMessage();
+        });
+      }
+
+      // Send message
+      window.sendMessage = function() {
+        var input = document.getElementById('userInput');
+        var text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+
+        // Remove initial suggestions
+        var initSug = document.getElementById('initialSuggestions');
+        if (initSug) initSug.remove();
+
+        // Add user message
+        addMessage(text, 'user');
+
+        // Store in recent
+        recentQuestions.unshift(text);
+        if (recentQuestions.length > 10) recentQuestions.pop();
+        updateRecent();
+
+        // Show typing indicator
+        var typingId = showTyping();
+
+        // Simulate thinking time
+        setTimeout(function() {
+          removeTyping(typingId);
+          generateOracleResponse(text);
+        }, 800 + Math.random() * 1200);
+      };
+
+      window.askSuggestion = function(btn) {
+        document.getElementById('userInput').value = btn.textContent;
+        sendMessage();
+      };
+
+      function generateOracleResponse(question) {
+        var analysis = SmartOracle.analyzeQuestion(question);
+
+        // Draw a card for the response
+        var cards = [];
+        if (deck) {
+          var allCards = (deck.majorArcana || []).concat(deck.minorArcana || []);
+          if (allCards.length > 0) {
+            var idx = Math.floor(Math.random() * allCards.length);
+            var card = allCards[idx];
+            card.reversed = Math.random() < 0.3;
+            cards.push(card);
+          }
+        }
+
+        var response = SmartOracle.generateResponse(analysis.keywords, cards);
+
+        // Build response HTML
+        var html = '<div class="oracle-label">Cosmic Oracle</div>';
+        html += '<p>' + response.message + '</p>';
+
+        // Card display
+        if (cards.length > 0) {
+          var card = cards[0];
+          var cardName = card.name + (card.reversed ? ' (Reversed)' : '');
+          html += '<div class="msg-card">';
+          html += '<div id="cardArt_' + Date.now() + '" style="width:50px;height:75px"></div>';
+          html += '<div class="msg-card-info"><div class="msg-card-name">' + cardName + '</div>';
+          html += '<div style="font-size:0.75rem;color:var(--ax-text-muted)">' + (card.reversed ? card.reversed_meaning || card.essence || '' : card.upright || card.essence || '') + '</div></div>';
+          html += '</div>';
+        }
+
+        // Follow-up suggestions
+        if (response.followUpPrompts && response.followUpPrompts.length > 0) {
+          html += '<div class="suggestions">';
+          for (var i = 0; i < Math.min(3, response.followUpPrompts.length); i++) {
+            html += '<button class="suggestion-btn" onclick="askSuggestion(this)">' + response.followUpPrompts[i] + '</button>';
+          }
+          html += '</div>';
+        }
+
+        addMessage(html, 'oracle', true);
+
+        // Generate card SVG after adding to DOM
+        if (cards.length > 0) {
+          setTimeout(function() {
+            var artContainers = document.querySelectorAll('[id^="cardArt_"]');
+            var lastContainer = artContainers[artContainers.length - 1];
+            if (lastContainer && typeof CardArtGenerator !== 'undefined') {
+              var svg = CardArtGenerator.generateCardSVG(cards[0].id, 50, 75);
+              lastContainer.innerHTML = svg;
+            }
+          }, 50);
+        }
+      }
+
+      function addMessage(content, type, isHtml) {
+        var messages = document.getElementById('messages');
+        var div = document.createElement('div');
+        div.className = 'msg msg-' + type;
+        if (isHtml) {
+          div.innerHTML = content;
+        } else {
+          div.textContent = content;
+        }
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function showTyping() {
+        var messages = document.getElementById('messages');
+        var div = document.createElement('div');
+        var id = 'typing_' + Date.now();
+        div.id = id;
+        div.className = 'msg msg-oracle';
+        div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+        return id;
+      }
+
+      function removeTyping(id) {
+        var el = document.getElementById(id);
+        if (el) el.remove();
+      }
+
+      function updateRecent() {
+        var container = document.getElementById('recentQuestions');
+        container.innerHTML = '';
+        for (var i = 0; i < Math.min(5, recentQuestions.length); i++) {
+          var div = document.createElement('div');
+          div.className = 'recent-item';
+          div.textContent = recentQuestions[i].substring(0, 40) + (recentQuestions[i].length > 40 ? '...' : '');
+          div.setAttribute('data-q', recentQuestions[i]);
+          div.onclick = function() {
+            document.getElementById('userInput').value = this.getAttribute('data-q');
+            sendMessage();
+          };
+          container.appendChild(div);
+        }
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
