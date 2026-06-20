@@ -122,9 +122,15 @@
 
         var guidance = MoonPhase.getTarotMoonGuidance(moon.phase);
         var moonDetails = document.getElementById('moonDetails');
-        moonDetails.innerHTML = '<p style="font-size:0.8rem;color:var(--ax-text-muted);margin:0">' +
-          '<strong style="color:var(--ax-secondary)">' + guidance.title + '</strong><br>' +
-          guidance.guidance + '</p>';
+        var guidanceP = document.createElement('p');
+        guidanceP.style.cssText = 'font-size:0.8rem;color:var(--ax-text-muted);margin:0';
+        var strong = document.createElement('strong');
+        strong.style.color = 'var(--ax-secondary)';
+        strong.textContent = guidance.title;
+        guidanceP.appendChild(strong);
+        guidanceP.appendChild(document.createElement('br'));
+        guidanceP.appendChild(document.createTextNode(guidance.guidance));
+        moonDetails.appendChild(guidanceP);
 
         // Enter key
         document.getElementById('userInput').addEventListener('keypress', function(e) {
@@ -166,6 +172,12 @@
         sendMessage();
       };
 
+      function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
       function generateOracleResponse(question) {
         var analysis = SmartOracle.analyzeQuestion(question);
 
@@ -183,31 +195,61 @@
 
         var response = SmartOracle.generateResponse(analysis.keywords, cards);
 
-        // Build response HTML
-        var html = '<div class="oracle-label">Cosmic Oracle</div>';
-        html += '<p>' + response.message + '</p>';
+        // Build response using DOM construction for safety
+        var container = document.createElement('div');
+
+        var label = document.createElement('div');
+        label.className = 'oracle-label';
+        label.textContent = 'Cosmic Oracle';
+        container.appendChild(label);
+
+        var msgP = document.createElement('p');
+        msgP.textContent = response.message;
+        container.appendChild(msgP);
 
         // Card display
         if (cards.length > 0) {
           var card = cards[0];
           var cardName = card.name + (card.reversed ? ' (Reversed)' : '');
-          html += '<div class="msg-card">';
-          html += '<div id="cardArt_' + Date.now() + '" style="width:50px;height:75px"></div>';
-          html += '<div class="msg-card-info"><div class="msg-card-name">' + cardName + '</div>';
-          html += '<div style="font-size:0.75rem;color:var(--ax-text-muted)">' + (card.reversed ? card.reversed_meaning || card.essence || '' : card.upright || card.essence || '') + '</div></div>';
-          html += '</div>';
+          var cardDiv = document.createElement('div');
+          cardDiv.className = 'msg-card';
+
+          var artDiv = document.createElement('div');
+          artDiv.id = 'cardArt_' + Date.now();
+          artDiv.style.cssText = 'width:50px;height:75px';
+          cardDiv.appendChild(artDiv);
+
+          var infoDiv = document.createElement('div');
+          infoDiv.className = 'msg-card-info';
+          var nameDiv = document.createElement('div');
+          nameDiv.className = 'msg-card-name';
+          nameDiv.textContent = cardName;
+          infoDiv.appendChild(nameDiv);
+
+          var meaningDiv = document.createElement('div');
+          meaningDiv.style.cssText = 'font-size:0.75rem;color:var(--ax-text-muted)';
+          meaningDiv.textContent = card.reversed ? (card.reversed_meaning || card.essence || '') : (card.upright || card.essence || '');
+          infoDiv.appendChild(meaningDiv);
+
+          cardDiv.appendChild(infoDiv);
+          container.appendChild(cardDiv);
         }
 
         // Follow-up suggestions
         if (response.followUpPrompts && response.followUpPrompts.length > 0) {
-          html += '<div class="suggestions">';
+          var sugDiv = document.createElement('div');
+          sugDiv.className = 'suggestions';
           for (var i = 0; i < Math.min(3, response.followUpPrompts.length); i++) {
-            html += '<button class="suggestion-btn" onclick="askSuggestion(this)">' + response.followUpPrompts[i] + '</button>';
+            var btn = document.createElement('button');
+            btn.className = 'suggestion-btn';
+            btn.textContent = response.followUpPrompts[i];
+            btn.onclick = function() { askSuggestion(this); };
+            sugDiv.appendChild(btn);
           }
-          html += '</div>';
+          container.appendChild(sugDiv);
         }
 
-        addMessage(html, 'oracle', true);
+        addMessageNode(container, 'oracle');
 
         // Generate card SVG after adding to DOM
         if (cards.length > 0) {
@@ -227,10 +269,25 @@
         var div = document.createElement('div');
         div.className = 'msg msg-' + type;
         if (isHtml) {
-          div.innerHTML = content;
+          // Sanitize: parse as HTML in an inert context, then adopt safe nodes
+          var parser = new DOMParser();
+          var doc = parser.parseFromString('<div>' + content + '</div>', 'text/html');
+          var fragment = doc.body.firstChild;
+          while (fragment && fragment.firstChild) {
+            div.appendChild(fragment.firstChild);
+          }
         } else {
           div.textContent = content;
         }
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function addMessageNode(node, type) {
+        var messages = document.getElementById('messages');
+        var div = document.createElement('div');
+        div.className = 'msg msg-' + type;
+        div.appendChild(node);
         messages.appendChild(div);
         messages.scrollTop = messages.scrollHeight;
       }

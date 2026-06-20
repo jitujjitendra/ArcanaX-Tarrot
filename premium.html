@@ -334,10 +334,14 @@
         showToast("Reading saved to journal!");
       } else {
         // Fallback: save to localStorage directly
-        var readings = JSON.parse(localStorage.getItem("arcanax-premium-readings") || "[]");
-        readings.unshift({ type: selectedSpread, date: new Date().toISOString(), summary: lastReading.summary, cards: drawnCards.map(function(c) { return c.name; }) });
-        localStorage.setItem("arcanax-premium-readings", JSON.stringify(readings));
-        showToast("Reading saved!");
+        try {
+          var readings = JSON.parse(localStorage.getItem("arcanax-premium-readings") || "[]");
+          readings.unshift({ type: selectedSpread, date: new Date().toISOString(), summary: lastReading.summary, cards: drawnCards.map(function(c) { return c.name; }) });
+          localStorage.setItem("arcanax-premium-readings", JSON.stringify(readings));
+          showToast("Reading saved!");
+        } catch (e) {
+          showToast("Unable to save - storage full or unavailable");
+        }
       }
     }
 

@@ -180,16 +180,23 @@
       var imported = 0;
       var readings = data.readings || [];
       for (var i = 0; i < readings.length; i++) {
+        var entry = readings[i];
+
+        // Validate required fields before accepting
+        if (!entry || typeof entry !== 'object') continue;
+        if (!entry.id || typeof entry.id !== 'string') continue;
+        if (!entry.timestamp || typeof entry.timestamp !== 'string') continue;
+
         // Avoid duplicates by ID
         var exists = false;
         for (var j = 0; j < store.readings.length; j++) {
-          if (store.readings[j].id === readings[i].id) {
+          if (store.readings[j].id === entry.id) {
             exists = true;
             break;
           }
         }
         if (!exists) {
-          store.readings.push(readings[i]);
+          store.readings.push(entry);
           imported++;
         }
       }

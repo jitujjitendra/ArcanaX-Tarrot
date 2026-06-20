@@ -15,42 +15,70 @@
 }(typeof self !== 'undefined' ? self : this, function() {
   'use strict';
 
+  // Detect if page is in a subdirectory (e.g., learn/ or tarot/)
+  // and compute the correct relative prefix for root-level pages.
+  function getBasePrefix() {
+    if (typeof window === 'undefined') return '';
+    var path = window.location.pathname;
+    // Check if we are inside a known subdirectory (learn/, tarot/)
+    if (/\/(learn|tarot)\//.test(path)) {
+      return '../';
+    }
+    return '';
+  }
+
+  var BASE = getBasePrefix();
+
   var NAV_ITEMS = [
-    { label: 'Home', href: '/index.html', icon: '\u2302' },
-    { label: 'Oracle', href: '/oracle.html', icon: '\u2728' },
-    { label: 'Journal', href: '/journal.html', icon: '\uD83D\uDCD6' },
-    { label: 'Learn', href: '/learn/', icon: '\uD83C\uDF93' },
-    { label: 'Cards', href: '/tarot/', icon: '\uD83C\uDCCF' },
-    { label: 'Premium', href: '/premium.html', icon: '\u2B50' },
-    { label: 'Birth Chart', href: '/birthchart.html', icon: '\u2609' },
-    { label: 'Expert', href: '/expert.html', icon: '\uD83D\uDD2E' }
+    { label: 'Home', href: BASE + 'index.html', icon: '\u2302' },
+    { label: 'Oracle', href: BASE + 'oracle.html', icon: '\u2728' },
+    { label: 'Journal', href: BASE + 'journal.html', icon: '\uD83D\uDCD6' },
+    { label: 'Learn', href: BASE + 'learn/', icon: '\uD83C\uDF93' },
+    { label: 'Cards', href: BASE + 'tarot/', icon: '\uD83C\uDCCF' },
+    { label: 'Premium', href: BASE + 'premium.html', icon: '\u2B50' },
+    { label: 'Birth Chart', href: BASE + 'birthchart.html', icon: '\u2609' },
+    { label: 'Expert', href: BASE + 'expert.html', icon: '\uD83D\uDD2E' }
   ];
 
   var FOOTER_LINKS = [
-    { label: 'Share', href: '/share.html' },
-    { label: 'About', href: '/index.html#about' },
-    { label: 'Privacy', href: '/index.html#privacy' },
-    { label: 'Terms', href: '/index.html#terms' }
+    { label: 'Share', href: BASE + 'share.html' },
+    { label: 'About', href: BASE + 'index.html#about' },
+    { label: 'Privacy', href: BASE + 'index.html#privacy' },
+    { label: 'Terms', href: BASE + 'index.html#terms' }
   ];
 
-  function getCurrentPath() {
+  function getCurrentPageName() {
     var path = window.location.pathname;
-    // Normalize trailing slashes and index.html
-    if (path.endsWith('/index.html')) {
-      path = path.replace(/index\.html$/, '');
+    // Get the last segment(s) for matching
+    var parts = path.split('/').filter(function(p) { return p.length > 0; });
+    if (parts.length === 0) return 'index.html';
+    // Return the relevant trailing portion (e.g., "learn/" or "oracle.html")
+    var last = parts[parts.length - 1];
+    if (last === 'index.html') {
+      if (parts.length >= 2) {
+        // e.g., /learn/index.html -> "learn/"
+        return parts[parts.length - 2] + '/';
+      }
+      return 'index.html';
     }
-    return path;
+    if (last.indexOf('.') === -1) {
+      // Directory without trailing slash in URL (e.g., /learn)
+      return last + '/';
+    }
+    return last;
   }
 
   function isActive(href) {
-    var current = getCurrentPath();
-    if (href === '/index.html' && (current === '/' || current === '/index.html')) {
+    var current = getCurrentPageName();
+    // Normalize the href to just its significant tail portion
+    var hrefNorm = href.replace(/^\.\.\//, '');
+    if (hrefNorm === 'index.html' && (current === 'index.html' || current === '/')) {
       return true;
     }
-    if (href.endsWith('/')) {
-      return current.startsWith(href);
+    if (hrefNorm.endsWith('/')) {
+      return current === hrefNorm || current.indexOf(hrefNorm) !== -1;
     }
-    return current === href;
+    return current === hrefNorm;
   }
 
   function injectStyles() {
@@ -97,7 +125,7 @@
     // Brand
     var brand = document.createElement('a');
     brand.className = 'ax-nav-brand';
-    brand.href = '/index.html';
+    brand.href = BASE + 'index.html';
     brand.textContent = 'ArcanaX';
     inner.appendChild(brand);
 
