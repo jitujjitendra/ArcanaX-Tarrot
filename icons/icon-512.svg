@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </radialGradient>
+    <linearGradient id="star-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b084ff"/>
+      <stop offset="50%" stop-color="#80e1ff"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+    <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b084ff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#80e1ff" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <circle cx="256" cy="256" r="256" fill="url(#bg-grad)"/>
+  <!-- Outer rings -->
+  <circle cx="256" cy="256" r="230" stroke="url(#ring-grad)" stroke-width="2" fill="none"/>
+  <circle cx="256" cy="256" r="200" stroke="#b084ff" stroke-width="1" fill="none" opacity="0.3"/>
+  <circle cx="256" cy="256" r="170" stroke="#80e1ff" stroke-width="0.8" fill="none" opacity="0.25"/>
+  <!-- Compass rose / 8-point star -->
+  <path d="M256 40 L276 206 L420 256 L276 306 L256 472 L236 306 L92 256 L236 206 Z" 
+        fill="none" stroke="url(#star-grad)" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Diagonal points -->
+  <path d="M140 140 L230 230 M372 140 L282 230 M140 372 L230 282 M372 372 L282 282"
+        stroke="#ffd700" stroke-width="1.5" opacity="0.5"/>
+  <!-- Inner diamond -->
+  <path d="M256 140 L330 256 L256 372 L182 256 Z" 
+        fill="none" stroke="#ffd700" stroke-width="1.8" opacity="0.6"/>
+  <!-- Smaller inner star -->
+  <path d="M256 180 L270 240 L330 256 L270 272 L256 332 L242 272 L182 256 L242 240 Z"
+        fill="none" stroke="#80e1ff" stroke-width="1.2" opacity="0.5"/>
+  <!-- Center orb -->
+  <circle cx="256" cy="256" r="20" fill="#ffffff" opacity="0.9"/>
+  <circle cx="256" cy="256" r="10" fill="#b084ff"/>
+  <!-- Cardinal accent dots -->
+  <circle cx="256" cy="55" r="6" fill="#80e1ff" opacity="0.8"/>
+  <circle cx="256" cy="457" r="6" fill="#80e1ff" opacity="0.8"/>
+  <circle cx="55" cy="256" r="6" fill="#80e1ff" opacity="0.8"/>
+  <circle cx="457" cy="256" r="6" fill="#80e1ff" opacity="0.8"/>
+  <!-- Diagonal accent dots -->
+  <circle cx="130" cy="130" r="4" fill="#ffd700" opacity="0.6"/>
+  <circle cx="382" cy="130" r="4" fill="#ffd700" opacity="0.6"/>
+  <circle cx="130" cy="382" r="4" fill="#ffd700" opacity="0.6"/>
+  <circle cx="382" cy="382" r="4" fill="#ffd700" opacity="0.6"/>
+</svg>

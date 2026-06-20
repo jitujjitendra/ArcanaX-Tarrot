@@ -1,0 +1,418 @@
+/**
+ * ArcanaX Pages - Shared Cosmic Dark Theme Stylesheet
+ * Used by all standalone pages (tarot card SEO pages, learn pages, etc.)
+ */
+
+/* ============================================================
+   CSS VARIABLES
+   ============================================================ */
+:root {
+  --ax-bg: #0a0a1a;
+  --ax-bg-surface: #12121f;
+  --ax-bg-card: #16162a;
+  --ax-text: #e8e8ff;
+  --ax-text-muted: #a0a0c0;
+  --ax-accent: #b084ff;
+  --ax-accent-soft: rgba(176, 132, 255, 0.15);
+  --ax-gold: #ffd700;
+  --ax-gold-soft: rgba(255, 215, 0, 0.12);
+  --ax-secondary: #80e1ff;
+  --ax-border: rgba(255, 255, 255, 0.08);
+  --ax-border-accent: rgba(176, 132, 255, 0.3);
+  --ax-shadow-glow: 0 0 30px rgba(176, 132, 255, 0.15), 0 0 60px rgba(128, 225, 255, 0.08);
+  --ax-shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 1px rgba(176, 132, 255, 0.2);
+  --ax-radius: 1rem;
+  --ax-radius-lg: 1.5rem;
+  --ax-font-display: 'Cormorant Garamond', Georgia, serif;
+  --ax-font-body: 'Inter', system-ui, sans-serif;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+.ax-page {
+  min-height: 100vh;
+  background-color: var(--ax-bg);
+  color: var(--ax-text);
+  font-family: var(--ax-font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ax-page *,
+.ax-page *::before,
+.ax-page *::after {
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.ax-heading {
+  font-family: var(--ax-font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ax-text);
+}
+
+.ax-heading-xl { font-size: clamp(2.5rem, 6vw, 4rem); }
+.ax-heading-lg { font-size: clamp(2rem, 4vw, 3rem); }
+.ax-heading-md { font-size: clamp(1.5rem, 3vw, 2rem); }
+.ax-heading-sm { font-size: clamp(1.125rem, 2vw, 1.5rem); }
+
+.ax-text-gradient {
+  background: linear-gradient(135deg, var(--ax-accent), var(--ax-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ax-text-muted {
+  color: var(--ax-text-muted);
+}
+
+.ax-text-gold {
+  color: var(--ax-gold);
+}
+
+.ax-eyebrow {
+  font-size: 0.625rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--ax-secondary);
+}
+
+/* ============================================================
+   LAYOUT / CONTAINER
+   ============================================================ */
+.ax-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .ax-container { padding: 0 1.5rem; }
+}
+
+/* ============================================================
+   GLASS CARD
+   ============================================================ */
+.ax-glass {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--ax-border);
+  border-radius: var(--ax-radius-lg);
+  box-shadow: var(--ax-shadow-card);
+}
+
+.ax-glass-sm {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--ax-border);
+  border-radius: var(--ax-radius);
+}
+
+/* ============================================================
+   RESPONSIVE GRID
+   ============================================================ */
+.ax-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.ax-grid-2 { grid-template-columns: 1fr; }
+.ax-grid-3 { grid-template-columns: 1fr; }
+.ax-grid-4 { grid-template-columns: 1fr; }
+
+@media (min-width: 640px) {
+  .ax-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .ax-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .ax-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .ax-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .ax-grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ============================================================
+   CARD FLIP ANIMATION (3D CSS Transform)
+   ============================================================ */
+.ax-card-flip-container {
+  perspective: 1000px;
+  width: 100%;
+  height: 100%;
+}
+
+.ax-card-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.ax-card-flip-container.flipped .ax-card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.ax-card-flip-front,
+.ax-card-flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--ax-radius);
+  overflow: hidden;
+}
+
+.ax-card-flip-back {
+  transform: rotateY(180deg);
+}
+
+/* ============================================================
+   STAR ANIMATIONS
+   ============================================================ */
+@keyframes ax-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes ax-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes ax-pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(176, 132, 255, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(176, 132, 255, 0.4), 0 0 60px rgba(128, 225, 255, 0.15); }
+}
+
+@keyframes ax-nebula-drift {
+  0% { transform: translateX(0) translateY(0) rotate(0deg); }
+  33% { transform: translateX(10px) translateY(-5px) rotate(1deg); }
+  66% { transform: translateX(-5px) translateY(5px) rotate(-0.5deg); }
+  100% { transform: translateX(0) translateY(0) rotate(0deg); }
+}
+
+@keyframes ax-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ax-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ax-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.ax-animate-twinkle { animation: ax-twinkle 3s ease-in-out infinite; }
+.ax-animate-float { animation: ax-float 6s ease-in-out infinite; }
+.ax-animate-pulse-glow { animation: ax-pulse-glow 4s ease-in-out infinite; }
+.ax-animate-nebula { animation: ax-nebula-drift 20s ease-in-out infinite; }
+.ax-animate-rise { animation: ax-rise 0.6s ease-out both; }
+.ax-animate-fade-in { animation: ax-fade-in 0.4s ease-out both; }
+.ax-animate-spin-slow { animation: ax-spin-slow 30s linear infinite; }
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+.ax-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ax-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ax-gap-sm { gap: 0.5rem; }
+.ax-gap-md { gap: 1rem; }
+.ax-gap-lg { gap: 1.5rem; }
+.ax-gap-xl { gap: 2rem; }
+
+.ax-mt-sm { margin-top: 0.5rem; }
+.ax-mt-md { margin-top: 1rem; }
+.ax-mt-lg { margin-top: 1.5rem; }
+.ax-mt-xl { margin-top: 2rem; }
+
+.ax-mb-sm { margin-bottom: 0.5rem; }
+.ax-mb-md { margin-bottom: 1rem; }
+.ax-mb-lg { margin-bottom: 1.5rem; }
+.ax-mb-xl { margin-bottom: 2rem; }
+
+.ax-p-sm { padding: 0.5rem; }
+.ax-p-md { padding: 1rem; }
+.ax-p-lg { padding: 1.5rem; }
+.ax-p-xl { padding: 2rem; }
+
+.ax-rounded { border-radius: var(--ax-radius); }
+.ax-rounded-lg { border-radius: var(--ax-radius-lg); }
+
+.ax-border { border: 1px solid var(--ax-border); }
+.ax-border-accent { border: 1px solid var(--ax-border-accent); }
+
+.ax-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.ax-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--ax-radius);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.ax-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.ax-btn:active {
+  transform: translateY(0);
+}
+
+.ax-btn-primary {
+  background: linear-gradient(135deg, var(--ax-accent), #6c3cff);
+  color: #ffffff;
+  box-shadow: var(--ax-shadow-glow);
+}
+
+.ax-btn-secondary {
+  background: transparent;
+  color: var(--ax-text);
+  border: 1px solid var(--ax-border);
+}
+
+.ax-btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ============================================================
+   BADGE / TAG
+   ============================================================ */
+.ax-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid var(--ax-border);
+  color: var(--ax-text-muted);
+}
+
+.ax-badge-accent {
+  border-color: var(--ax-border-accent);
+  color: var(--ax-accent);
+  background: var(--ax-accent-soft);
+}
+
+.ax-badge-gold {
+  border-color: rgba(255, 215, 0, 0.3);
+  color: var(--ax-gold);
+  background: var(--ax-gold-soft);
+}
+
+/* ============================================================
+   NEBULA BACKGROUND DECORATION
+   ============================================================ */
+.ax-nebula-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ax-nebula-bg::before,
+.ax-nebula-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+}
+
+.ax-nebula-bg::before {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(176, 132, 255, 0.4), transparent 70%);
+}
+
+.ax-nebula-bg::after {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(128, 225, 255, 0.3), transparent 70%);
+}
+
+/* ============================================================
+   RESPONSIVE UTILITIES
+   ============================================================ */
+.ax-hide-mobile { display: none; }
+.ax-hide-desktop { display: block; }
+
+@media (min-width: 768px) {
+  .ax-hide-mobile { display: block; }
+  .ax-hide-desktop { display: none; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .ax-animate-twinkle,
+  .ax-animate-float,
+  .ax-animate-pulse-glow,
+  .ax-animate-nebula,
+  .ax-animate-spin-slow {
+    animation: none !important;
+  }
+
+  .ax-card-flip-inner {
+    transition-duration: 0.001ms !important;
+  }
+
+  .ax-animate-rise {
+    animation-duration: 0.001ms !important;
+  }
+}

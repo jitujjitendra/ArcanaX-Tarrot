@@ -27,6 +27,8 @@
       type="image/svg+xml"
       href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" stroke="%2380E1FF" stroke-width="1" fill="none"/><path d="M16 3 L19 13 L29 16 L19 19 L16 29 L13 19 L3 16 L13 13 Z" stroke="%23B084FF" stroke-width="1.4" fill="none" stroke-linejoin="round"/><circle cx="16" cy="16" r="2" fill="%23FFFFFF"/></svg>'
     />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0a0a1a" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -56,5 +58,12 @@ Error generating stack: `+s.message+`
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').catch(function() {});
+        });
+      }
+    </script>
   </body>
 </html>
