@@ -80,5 +80,16 @@
   <url><loc>https://arcanax.app/tarot/knight-of-wands.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-06-20</lastmod></url>
   <url><loc>https://arcanax.app/tarot/queen-of-wands.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-06-20</lastmod></url>
   <url><loc>https://arcanax.app/tarot/king-of-wands.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/oracle.html</loc><changefreq>weekly</changefreq><priority>0.8</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/journal.html</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/share.html</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/expert.html</loc><changefreq>weekly</changefreq><priority>0.8</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/birthchart.html</loc><changefreq>weekly</changefreq><priority>0.8</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/premium.html</loc><changefreq>weekly</changefreq><priority>0.9</priority><lastmod>2026-06-20</lastmod></url>
   <url><loc>https://arcanax.app/learn/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/learn/tarot-basics.html</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/learn/major-arcana-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/learn/suits-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/learn/spreads-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://arcanax.app/learn/moon-tarot-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-20</lastmod></url>
 </urlset>
