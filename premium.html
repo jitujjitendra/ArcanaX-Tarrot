@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Readings - ArcanaX Cosmic Destiny</title>
+  <meta name="description" content="Experience deep premium tarot readings with enhanced interpretations, elemental balance analysis, card combination insights, and personalized action plans.">
+  <link rel="stylesheet" href="css/arcanax-pages.css">
+  <style>
+    .premium-page { min-height: 100vh; display: flex; flex-direction: column; }
+    .premium-header { padding: 1.5rem; border-bottom: 1px solid var(--ax-border); text-align: center; }
+    .premium-header h1 { font-family: var(--ax-font-display); font-size: 2rem; margin: 0 0 0.5rem; }
+    .premium-header p { color: var(--ax-text-muted); margin: 0; }
+    .premium-content { flex: 1; padding: 1.5rem; max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+    .spread-selection { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .spread-card { background: var(--ax-bg-card); border: 1px solid var(--ax-border); border-radius: var(--ax-radius-lg); padding: 1.5rem; cursor: pointer; transition: all 0.3s; text-align: center; }
+    .spread-card:hover, .spread-card.selected { border-color: var(--ax-accent); box-shadow: var(--ax-shadow-glow); }
+    .spread-card.selected { background: var(--ax-accent-soft); }
+    .spread-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .spread-name { font-family: var(--ax-font-display); font-size: 1.2rem; color: var(--ax-gold); margin-bottom: 0.3rem; }
+    .spread-desc { color: var(--ax-text-muted); font-size: 0.85rem; line-height: 1.4; }
+    .spread-positions { color: var(--ax-accent); font-size: 0.8rem; margin-top: 0.5rem; }
+    .read-btn { display: block; width: 100%; max-width: 400px; margin: 0 auto 2rem; padding: 1rem; background: linear-gradient(135deg, var(--ax-accent), #8060cc); border: none; border-radius: var(--ax-radius); color: #fff; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: opacity 0.2s; }
+    .read-btn:hover { opacity: 0.85; }
+    .read-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .reading-results { display: none; }
+    .reading-results.visible { display: block; }
+    .result-header { text-align: center; margin-bottom: 2rem; }
+    .result-header h2 { font-family: var(--ax-font-display); font-size: 1.5rem; color: var(--ax-gold); margin: 0 0 0.5rem; }
+    .result-header p { color: var(--ax-text-muted); font-size: 0.9rem; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+    .reading-card { background: var(--ax-bg-card); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 1.25rem; }
+    .reading-card-position { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ax-accent); margin-bottom: 0.5rem; }
+    .reading-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .reading-card-art { width: 60px; height: 90px; flex-shrink: 0; }
+    .reading-card-art svg { width: 100%; height: 100%; border-radius: 4px; }
+    .reading-card-name { font-family: var(--ax-font-display); font-size: 1.1rem; color: var(--ax-text); }
+    .reversed-tag { font-size: 0.65rem; background: rgba(239,68,68,0.15); color: #f87171; padding: 0.15rem 0.4rem; border-radius: 0.3rem; margin-left: 0.4rem; }
+    .reading-card-interp { color: var(--ax-text-muted); font-size: 0.85rem; line-height: 1.6; }
+    .section-panel { background: var(--ax-bg-card); border: 1px solid var(--ax-border); border-radius: var(--ax-radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; }
+    .section-panel h3 { font-family: var(--ax-font-display); font-size: 1.2rem; color: var(--ax-gold); margin: 0 0 1rem; }
+    .element-bar { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .element-item { display: flex; align-items: center; gap: 0.5rem; }
+    .element-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .element-dot.fire { background: #ff6b35; }
+    .element-dot.water { background: #4ecdc4; }
+    .element-dot.earth { background: #8fce00; }
+    .element-dot.air { background: #b8d4e3; }
+    .element-label { font-size: 0.85rem; color: var(--ax-text-muted); }
+    .element-count { color: var(--ax-text); font-weight: 600; }
+    .element-interp { color: var(--ax-text-muted); font-size: 0.9rem; line-height: 1.6; margin-top: 0.75rem; }
+    .combo-item { background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 1rem; margin-bottom: 0.75rem; }
+    .combo-pair { color: var(--ax-accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.3rem; }
+    .combo-quality { display: inline-block; background: var(--ax-gold-soft); color: var(--ax-gold); font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 1rem; margin-bottom: 0.4rem; }
+    .combo-meaning { color: var(--ax-text-muted); font-size: 0.85rem; line-height: 1.5; }
+    .action-step { background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+    .action-timeframe { color: var(--ax-gold); font-weight: 600; font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .action-text { color: var(--ax-text); font-size: 0.9rem; margin-bottom: 0.3rem; }
+    .action-reason { color: var(--ax-text-muted); font-size: 0.8rem; font-style: italic; }
+    .mantra-box { background: var(--ax-accent-soft); border: 1px solid var(--ax-border-accent); border-radius: var(--ax-radius); padding: 1rem 1.5rem; text-align: center; margin-top: 1rem; }
+    .mantra-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ax-text-muted); margin-bottom: 0.3rem; }
+    .mantra-text { font-family: var(--ax-font-display); font-size: 1.1rem; color: var(--ax-accent); font-style: italic; }
+    .summary-text { color: var(--ax-text); font-size: 0.95rem; line-height: 1.7; }
+    .bottom-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; margin-bottom: 2rem; }
+    .action-btn { padding: 0.6rem 1.2rem; border-radius: var(--ax-radius); font-size: 0.85rem; cursor: pointer; border: 1px solid var(--ax-border); background: var(--ax-bg-surface); color: var(--ax-text-muted); transition: all 0.2s; }
+    .action-btn:hover { border-color: var(--ax-accent); color: var(--ax-accent); }
+    .nav-link { display: inline-block; padding: 0.5rem 1rem; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); color: var(--ax-accent); text-decoration: none; font-size: 0.85rem; transition: border-color 0.2s; }
+    .nav-link:hover { border-color: var(--ax-accent); }
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: var(--ax-bg-card); border: 1px solid #34d399; color: #34d399; padding: 0.75rem 1.5rem; border-radius: var(--ax-radius); font-size: 0.85rem; display: none; z-index: 100; }
+    .toast.show { display: block; animation: fadeIn 0.3s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+  </style>
+</head>
+<body class="ax-page premium-page">
+  <header class="premium-header">
+    <h1>Premium Readings</h1>
+    <p>Deep interpretations with elemental balance and action plans</p>
+  </header>
+
+  <div class="premium-content">
+    <div class="spread-selection" id="spreadSelection">
+      <div class="spread-card selected" data-spread="deep-celtic-cross">
+        <div class="spread-icon">&#x2726;</div>
+        <div class="spread-name">Deep Celtic Cross</div>
+        <div class="spread-desc">The classic 10-card spread with premium-depth interpretations and card relationship analysis.</div>
+        <div class="spread-positions">10 positions</div>
+      </div>
+      <div class="spread-card" data-spread="yearly-forecast">
+        <div class="spread-icon">&#x2600;</div>
+        <div class="spread-name">Yearly Forecast</div>
+        <div class="spread-desc">A card for each month of the coming year. See the themes and energies awaiting you.</div>
+        <div class="spread-positions">12 positions</div>
+      </div>
+      <div class="spread-card" data-spread="relationship-deep-dive">
+        <div class="spread-icon">&#x2661;</div>
+        <div class="spread-name">Relationship Deep Dive</div>
+        <div class="spread-desc">Explore the dynamics, challenges, and potential of any significant relationship.</div>
+        <div class="spread-positions">7 positions</div>
+      </div>
+    </div>
+
+    <button class="read-btn" id="readBtn" onclick="performReading()">Begin Premium Reading</button>
+
+    <div class="reading-results" id="readingResults">
+      <div class="result-header">
+        <h2 id="resultTitle">Your Deep Celtic Cross</h2>
+        <p id="resultSubtitle"></p>
+      </div>
+
+      <div class="cards-grid" id="cardsGrid"></div>
+
+      <div class="section-panel" id="elementPanel">
+        <h3>Elemental Balance</h3>
+        <div class="element-bar" id="elementBar"></div>
+        <div class="element-interp" id="elementInterp"></div>
+      </div>
+
+      <div class="section-panel" id="comboPanel">
+        <h3>Card Combination Insights</h3>
+        <div id="comboList"></div>
+      </div>
+
+      <div class="section-panel" id="actionPanel">
+        <h3>Your Action Plan</h3>
+        <div id="actionSummary" class="summary-text" style="margin-bottom:1rem;"></div>
+        <div id="actionSteps"></div>
+        <div class="mantra-box">
+          <div class="mantra-label">Your Mantra</div>
+          <div class="mantra-text" id="mantraText"></div>
+        </div>
+      </div>
+
+      <div class="section-panel">
+        <h3>Reading Summary</h3>
+        <div class="summary-text" id="summaryText"></div>
+      </div>
+
+      <div class="bottom-actions">
+        <button class="action-btn" onclick="saveToJournal()">Save to Journal</button>
+        <button class="action-btn" onclick="shareReading()">Share as Image</button>
+        <button class="action-btn" onclick="performReading()">New Reading</button>
+      </div>
+    </div>
+
+    <a href="index.html" class="nav-link">Back to Home</a>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/tarot-engine.js"></script>
+  <script src="js/card-art-generator.js"></script>
+  <script src="js/premium-engine.js"></script>
+  <script src="js/reading-journal.js"></script>
+  <script src="js/share-reading.js"></script>
+  <script>
+    var selectedSpread = "deep-celtic-cross";
+    var lastReading = null;
+    var drawnCards = null;
+
+    // Spread selection
+    document.querySelectorAll(".spread-card").forEach(function(card) {
+      card.addEventListener("click", function() {
+        document.querySelectorAll(".spread-card").forEach(function(c) { c.classList.remove("selected"); });
+        card.classList.add("selected");
+        selectedSpread = card.getAttribute("data-spread");
+      });
+    });
+
+    function performReading() {
+      // Load deck and draw cards
+      var deck = typeof TarotEngine !== "undefined" ? TarotEngine.getDeck() : null;
+      if (!deck) {
+        // Try loading
+        if (typeof TarotEngine !== "undefined" && TarotEngine.loadDeck) {
+          // loadDeck may need the JSON path
+          showToast("Loading deck data...");
+          fetch("assets/tarot-deck.json").then(function(r) { return r.json(); }).then(function(data) {
+            TarotEngine.loadDeck(data);
+            doReading();
+          }).catch(function() {
+            doReadingFallback();
+          });
+          return;
+        }
+        doReadingFallback();
+        return;
+      }
+      doReading();
+    }
+
+    function doReading() {
+      var spreads = PremiumEngine.getAvailableSpreads();
+      var spread = spreads.find(function(s) { return s.id === selectedSpread; });
+      var numCards = spread ? spread.positions : 10;
+
+      // Draw cards using tarot engine
+      var allCards = [];
+      var deck = TarotEngine.getDeck();
+      if (deck) {
+        var major = deck.majorArcana || [];
+        var minor = deck.minorArcana || [];
+        allCards = major.concat(minor);
+      }
+
+      // Shuffle and draw
+      var shuffled = shuffleArray(allCards.slice());
+      drawnCards = shuffled.slice(0, numCards).map(function(card) {
+        card.isReversed = Math.random() < 0.3;
+        return card;
+      });
+
+      // Generate premium reading
+      lastReading = PremiumEngine.generateDeepReading(drawnCards, selectedSpread);
+      renderReading(lastReading);
+    }
+
+    function doReadingFallback() {
+      // Fallback with minimal card data
+      var fallbackCards = [
+        { id: "the-fool", name: "The Fool", element: "air", essence: "new beginnings and fearless leaps", upright: "Fresh starts, innocence, spontaneity", reversed: "Recklessness, fear of change", keywords: ["beginning"] },
+        { id: "the-magician", name: "The Magician", element: "air", essence: "manifestation and willpower", upright: "Skill, willpower, creation", reversed: "Manipulation, untapped talent", keywords: ["power"] },
+        { id: "the-high-priestess", name: "The High Priestess", element: "water", essence: "intuition and hidden knowledge", upright: "Intuition, mystery, inner knowledge", reversed: "Secrets withheld, disconnected intuition", keywords: ["intuition"] },
+        { id: "the-empress", name: "The Empress", element: "earth", essence: "abundance and nurturing creation", upright: "Fertility, nurturing, abundance", reversed: "Creative block, dependence", keywords: ["abundance"] },
+        { id: "the-emperor", name: "The Emperor", element: "fire", essence: "authority and structured power", upright: "Authority, structure, leadership", reversed: "Rigidity, domination", keywords: ["authority"] },
+        { id: "strength", name: "Strength", element: "fire", essence: "inner courage and gentle power", upright: "Courage, patience, compassion", reversed: "Self-doubt, weakness", keywords: ["courage"] },
+        { id: "the-hermit", name: "The Hermit", element: "earth", essence: "inner wisdom and solitude", upright: "Introspection, guidance, solitude", reversed: "Isolation, withdrawal", keywords: ["wisdom"] },
+        { id: "wheel-of-fortune", name: "Wheel of Fortune", element: "fire", essence: "cycles of destiny and change", upright: "Destiny, turning points, luck", reversed: "Bad luck, resistance to change", keywords: ["destiny"] },
+        { id: "the-star", name: "The Star", element: "air", essence: "hope and spiritual renewal", upright: "Hope, inspiration, serenity", reversed: "Despair, disconnection", keywords: ["hope"] },
+        { id: "the-world", name: "The World", element: "earth", essence: "completion and wholeness", upright: "Completion, integration, accomplishment", reversed: "Incompletion, shortcuts", keywords: ["completion"] },
+        { id: "the-sun", name: "The Sun", element: "fire", essence: "joy and radiant vitality", upright: "Joy, success, vitality", reversed: "Temporary setback, lack of clarity", keywords: ["joy"] },
+        { id: "the-moon", name: "The Moon", element: "water", essence: "illusion and subconscious depths", upright: "Illusion, intuition, dreams", reversed: "Confusion, fear, misinterpretation", keywords: ["illusion"] }
+      ];
+
+      var spreads = PremiumEngine.getAvailableSpreads();
+      var spread = spreads.find(function(s) { return s.id === selectedSpread; });
+      var numCards = spread ? spread.positions : 10;
+
+      var shuffled = shuffleArray(fallbackCards.slice());
+      while (shuffled.length < numCards) {
+        shuffled = shuffled.concat(shuffleArray(fallbackCards.slice()));
+      }
+      drawnCards = shuffled.slice(0, numCards).map(function(card) {
+        card.isReversed = Math.random() < 0.3;
+        return card;
+      });
+
+      lastReading = PremiumEngine.generateDeepReading(drawnCards, selectedSpread);
+      renderReading(lastReading);
+    }
+
+    function renderReading(reading) {
+      document.getElementById("resultTitle").textContent = "Your " + reading.spreadName;
+      document.getElementById("resultSubtitle").textContent = reading.cardCount + " cards drawn - " + new Date().toLocaleDateString();
+
+      // Render card interpretations
+      var cardsHtml = "";
+      reading.interpretations.forEach(function(interp) {
+        var svgHtml = "";
+        if (typeof CardArtGenerator !== "undefined") {
+          svgHtml = CardArtGenerator.generateCardSVG(interp.card.id, 60, 90);
+        }
+        var reversedTag = interp.isReversed ? '<span class="reversed-tag">Reversed</span>' : '';
+        cardsHtml += '<div class="reading-card">' +
+          '<div class="reading-card-position">' + interp.position + '</div>' +
+          '<div class="reading-card-header">' +
+          '<div class="reading-card-art">' + svgHtml + '</div>' +
+          '<div><div class="reading-card-name">' + interp.card.name + reversedTag + '</div></div>' +
+          '</div>' +
+          '<div class="reading-card-interp">' + interp.interpretation + '</div>' +
+          '</div>';
+      });
+      document.getElementById("cardsGrid").innerHTML = cardsHtml;
+
+      // Render elemental balance
+      var balance = reading.elementalBalance;
+      var barHtml = "";
+      ["fire", "water", "earth", "air"].forEach(function(el) {
+        barHtml += '<div class="element-item"><span class="element-dot ' + el + '"></span><span class="element-label">' + el + '</span><span class="element-count"> ' + (balance.counts[el] || 0) + '</span></div>';
+      });
+      document.getElementById("elementBar").innerHTML = barHtml;
+      document.getElementById("elementInterp").textContent = balance.interpretation;
+
+      // Render combinations
+      var comboHtml = "";
+      reading.combinations.forEach(function(combo) {
+        comboHtml += '<div class="combo-item">' +
+          '<div class="combo-pair">' + combo.card1 + ' + ' + combo.card2 + '</div>' +
+          '<span class="combo-quality">' + combo.elementalInteraction.quality + '</span>' +
+          '<div class="combo-meaning">' + combo.combinedInterpretation + '</div>' +
+          '</div>';
+      });
+      document.getElementById("comboList").innerHTML = comboHtml;
+
+      // Render action plan
+      var plan = reading.actionPlan;
+      document.getElementById("actionSummary").textContent = plan.summary;
+      var stepsHtml = "";
+      plan.steps.forEach(function(step) {
+        stepsHtml += '<div class="action-step">' +
+          '<div class="action-timeframe">' + step.timeframe + '</div>' +
+          '<div class="action-text">' + step.action + '</div>' +
+          '<div class="action-reason">' + step.reasoning + '</div>' +
+          '</div>';
+      });
+      document.getElementById("actionSteps").innerHTML = stepsHtml;
+      document.getElementById("mantraText").textContent = plan.mantra;
+
+      // Summary
+      document.getElementById("summaryText").textContent = reading.summary;
+
+      // Show results
+      document.getElementById("readingResults").classList.add("visible");
+      document.getElementById("readingResults").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function shuffleArray(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = arr[i]; arr[i] = arr[j]; arr[j] = temp;
+      }
+      return arr;
+    }
+
+    function saveToJournal() {
+      if (!lastReading || !drawnCards) return;
+      if (typeof ReadingJournal !== "undefined" && ReadingJournal.saveReading) {
+        ReadingJournal.saveReading({
+          type: "premium-" + selectedSpread,
+          cards: drawnCards.map(function(c) { return { id: c.id, name: c.name, isReversed: c.isReversed }; }),
+          spreadName: lastReading.spreadName,
+          summary: lastReading.summary,
+          date: new Date().toISOString()
+        });
+        showToast("Reading saved to journal!");
+      } else {
+        // Fallback: save to localStorage directly
+        try {
+          var readings = JSON.parse(localStorage.getItem("arcanax-premium-readings") || "[]");
+          readings.unshift({ type: selectedSpread, date: new Date().toISOString(), summary: lastReading.summary, cards: drawnCards.map(function(c) { return c.name; }) });
+          localStorage.setItem("arcanax-premium-readings", JSON.stringify(readings));
+          showToast("Reading saved!");
+        } catch (e) {
+          showToast("Unable to save - storage full or unavailable");
+        }
+      }
+    }
+
+    function shareReading() {
+      if (!lastReading) return;
+      if (typeof ShareReading !== "undefined" && ShareReading.createReadingImage) {
+        ShareReading.createReadingImage({
+          title: lastReading.spreadName,
+          cards: drawnCards,
+          summary: lastReading.summary
+        });
+        showToast("Share image generated!");
+      } else {
+        showToast("Share feature loading...");
+      }
+    }
+
+    function showToast(msg) {
+      var toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(function() { toast.classList.remove("show"); }, 3000);
+    }
+  </script>
+  <script src="js/ambient-sound.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

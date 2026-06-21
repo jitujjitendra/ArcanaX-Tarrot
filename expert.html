@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expert Tarot Readers - ArcanaX Cosmic Destiny</title>
+  <meta name="description" content="Book a session with verified tarot experts. Specializing in love, career, and spiritual guidance. Personalized one-on-one readings.">
+  <link rel="stylesheet" href="css/arcanax-pages.css">
+  <style>
+    .expert-page { min-height: 100vh; display: flex; flex-direction: column; }
+    .expert-header { padding: 1.5rem; border-bottom: 1px solid var(--ax-border); text-align: center; }
+    .expert-header h1 { font-family: var(--ax-font-display); font-size: 2rem; margin: 0 0 0.5rem; }
+    .expert-header p { color: var(--ax-text-muted); margin: 0; }
+    .notice-banner { background: var(--ax-accent-soft); border: 1px solid var(--ax-border-accent); border-radius: var(--ax-radius); padding: 1rem 1.5rem; margin: 1.5rem; text-align: center; color: var(--ax-secondary); font-size: 0.9rem; }
+    .filter-bar { padding: 1rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; border-bottom: 1px solid var(--ax-border); }
+    .filter-btn { background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: 2rem; padding: 0.4rem 1rem; font-size: 0.8rem; color: var(--ax-text-muted); cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--ax-accent); color: var(--ax-accent); background: var(--ax-accent-soft); }
+    .experts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; padding: 1.5rem; flex: 1; }
+    .expert-card { background: var(--ax-bg-card); border: 1px solid var(--ax-border); border-radius: var(--ax-radius-lg); padding: 1.5rem; position: relative; transition: border-color 0.3s, box-shadow 0.3s; }
+    .expert-card:hover { border-color: var(--ax-border-accent); box-shadow: var(--ax-shadow-glow); }
+    .coming-soon-badge { position: absolute; top: 1rem; right: 1rem; background: var(--ax-gold-soft); border: 1px solid var(--ax-gold); border-radius: 1rem; padding: 0.2rem 0.6rem; font-size: 0.65rem; color: var(--ax-gold); text-transform: uppercase; letter-spacing: 0.05em; }
+    .expert-avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--ax-accent), var(--ax-secondary)); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem; }
+    .expert-name { font-family: var(--ax-font-display); font-size: 1.3rem; margin: 0 0 0.3rem; color: var(--ax-text); }
+    .expert-specialty { color: var(--ax-accent); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .expert-rating { display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0.75rem; }
+    .star { color: var(--ax-gold); font-size: 0.85rem; }
+    .rating-text { color: var(--ax-text-muted); font-size: 0.8rem; }
+    .expert-bio { color: var(--ax-text-muted); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem; }
+    .expert-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--ax-border); }
+    .expert-price { color: var(--ax-gold); font-weight: 600; font-size: 0.9rem; }
+    .expert-status { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 1rem; }
+    .status-available { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+    .status-busy { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+    .status-offline { background: rgba(107,114,128,0.15); color: #9ca3af; border: 1px solid rgba(107,114,128,0.3); }
+    .book-btn { display: block; width: 100%; margin-top: 1rem; padding: 0.75rem; background: linear-gradient(135deg, var(--ax-accent), #8060cc); border: none; border-radius: var(--ax-radius); color: #fff; font-weight: 600; cursor: pointer; transition: opacity 0.2s; font-size: 0.9rem; }
+    .book-btn:hover { opacity: 0.85; }
+    .book-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: var(--ax-bg-card); border: 1px solid var(--ax-border-accent); border-radius: var(--ax-radius-lg); padding: 2rem; max-width: 420px; width: 90%; max-height: 80vh; overflow-y: auto; }
+    .modal h2 { font-family: var(--ax-font-display); margin: 0 0 1rem; font-size: 1.4rem; }
+    .modal label { display: block; color: var(--ax-text-muted); font-size: 0.85rem; margin-bottom: 0.3rem; margin-top: 1rem; }
+    .modal input, .modal select { width: 100%; padding: 0.6rem 0.8rem; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: 0.5rem; color: var(--ax-text); font-size: 0.9rem; outline: none; box-sizing: border-box; }
+    .modal input:focus, .modal select:focus { border-color: var(--ax-accent); }
+    .modal-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+    .modal-actions button { flex: 1; padding: 0.7rem; border-radius: var(--ax-radius); font-weight: 600; cursor: pointer; border: none; font-size: 0.9rem; }
+    .btn-confirm { background: linear-gradient(135deg, var(--ax-accent), #8060cc); color: #fff; }
+    .btn-cancel { background: var(--ax-bg-surface); color: var(--ax-text-muted); border: 1px solid var(--ax-border) !important; }
+    .nav-link { display: inline-block; padding: 0.5rem 1rem; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); color: var(--ax-accent); text-decoration: none; font-size: 0.85rem; margin: 1.5rem; }
+    .nav-link:hover { border-color: var(--ax-accent); }
+    .confirmation-msg { text-align: center; padding: 1rem; color: #34d399; display: none; }
+  </style>
+</head>
+<body class="ax-page expert-page">
+  <header class="expert-header">
+    <h1>Expert Tarot Readers</h1>
+    <p>One-on-one sessions with verified spiritual guides</p>
+  </header>
+
+  <div class="notice-banner">
+    Verified experts joining soon - register your interest by booking a slot below.
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="love">Love & Relationships</button>
+    <button class="filter-btn" data-filter="career">Career & Finance</button>
+    <button class="filter-btn" data-filter="spiritual">Spiritual Growth</button>
+    <button class="filter-btn" data-filter="available">Available Now</button>
+  </div>
+
+  <div class="experts-grid" id="expertsGrid"></div>
+
+  <a href="index.html" class="nav-link">Back to Home</a>
+
+  <!-- Booking Modal -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal">
+      <h2>Book a Reading</h2>
+      <p id="bookingExpertName" style="color:var(--ax-accent);margin:0;"></p>
+      <label for="bookingDate">Preferred Date</label>
+      <input type="date" id="bookingDate" min="">
+      <label for="bookingTime">Preferred Time</label>
+      <select id="bookingTime">
+        <option value="10:00">10:00 AM</option>
+        <option value="11:00">11:00 AM</option>
+        <option value="12:00">12:00 PM</option>
+        <option value="14:00">2:00 PM</option>
+        <option value="15:00">3:00 PM</option>
+        <option value="16:00">4:00 PM</option>
+        <option value="18:00">6:00 PM</option>
+        <option value="19:00">7:00 PM</option>
+        <option value="20:00">8:00 PM</option>
+      </select>
+      <label for="bookingNotes">Notes (optional)</label>
+      <input type="text" id="bookingNotes" placeholder="What would you like guidance on?">
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-confirm" onclick="confirmBooking()">Confirm Booking</button>
+      </div>
+      <div class="confirmation-msg" id="confirmationMsg">Booking registered! We will notify you when this expert is available.</div>
+    </div>
+  </div>
+
+  <script>
+    var experts = [
+      { id: 1, name: "Luna Starweaver", specialty: "love", avatar: "\u2728", rating: 4.9, reviews: 234, price: "$45-65", bio: "Specializing in soulmate connections and relationship healing. 12 years of tarot practice with focus on emotional clarity.", status: "available", languages: ["English", "Spanish"] },
+      { id: 2, name: "Sage Ashworth", specialty: "career", avatar: "\u2604\uFE0F", rating: 4.8, reviews: 189, price: "$50-75", bio: "Business and career intuitive reader. Helps entrepreneurs and professionals find clarity in their professional path.", status: "available", languages: ["English"] },
+      { id: 3, name: "Mystic Raven", specialty: "spiritual", avatar: "\ud83c\udf19", rating: 4.9, reviews: 312, price: "$55-80", bio: "Deep spiritual guidance through Major Arcana work. Specializes in life transitions, shadow work, and soul purpose.", status: "busy", languages: ["English", "French"] },
+      { id: 4, name: "Crystal Meadows", specialty: "love", avatar: "\ud83d\udc9c", rating: 4.7, reviews: 156, price: "$40-55", bio: "Compassionate reader focusing on self-love, healing from heartbreak, and attracting healthy relationships.", status: "offline", languages: ["English", "Hindi"] },
+      { id: 5, name: "Phoenix Drake", specialty: "career", avatar: "\ud83d\udd25", rating: 4.8, reviews: 201, price: "$60-90", bio: "Transformation specialist for career pivots. Combines tarot with practical strategy for manifesting professional goals.", status: "available", languages: ["English", "Portuguese"] },
+      { id: 6, name: "Aria Moonlight", specialty: "spiritual", avatar: "\u2b50", rating: 5.0, reviews: 89, price: "$65-95", bio: "Advanced practitioner of Celtic Cross and astrological tarot. Integrates birth chart wisdom with card readings.", status: "offline", languages: ["English", "Italian"] }
+    ];
+
+    var currentFilter = "all";
+    var selectedExpert = null;
+
+    function renderExperts() {
+      var grid = document.getElementById("expertsGrid");
+      var filtered = experts.filter(function(e) {
+        if (currentFilter === "all") return true;
+        if (currentFilter === "available") return e.status === "available";
+        return e.specialty === currentFilter;
+      });
+
+      grid.innerHTML = filtered.map(function(expert) {
+        var stars = "";
+        for (var i = 0; i < 5; i++) {
+          stars += '<span class="star">' + (i < Math.floor(expert.rating) ? "\u2605" : "\u2606") + '</span>';
+        }
+        var statusClass = "status-" + expert.status;
+        var statusText = expert.status === "available" ? "Available" : expert.status === "busy" ? "In Session" : "Offline";
+        var comingSoon = expert.status === "offline" ? '<span class="coming-soon-badge">Coming Soon</span>' : '';
+
+        return '<div class="expert-card" data-specialty="' + expert.specialty + '" data-status="' + expert.status + '">' +
+          comingSoon +
+          '<div class="expert-avatar">' + expert.avatar + '</div>' +
+          '<h3 class="expert-name">' + expert.name + '</h3>' +
+          '<div class="expert-specialty">' + (expert.specialty === "love" ? "Love & Relationships" : expert.specialty === "career" ? "Career & Finance" : "Spiritual Growth") + '</div>' +
+          '<div class="expert-rating">' + stars + ' <span class="rating-text">' + expert.rating + ' (' + expert.reviews + ' reviews)</span></div>' +
+          '<p class="expert-bio">' + expert.bio + '</p>' +
+          '<div class="expert-meta"><span class="expert-price">' + expert.price + '</span><span class="expert-status ' + statusClass + '">' + statusText + '</span></div>' +
+          '<button class="book-btn" onclick="openBooking(' + expert.id + ')"' + (expert.status === "offline" ? " disabled" : "") + '>' + (expert.status === "offline" ? "Coming Soon" : "Book Session") + '</button>' +
+          '</div>';
+      }).join("");
+    }
+
+    function openBooking(expertId) {
+      selectedExpert = experts.find(function(e) { return e.id === expertId; });
+      if (!selectedExpert) return;
+      document.getElementById("bookingExpertName").textContent = "Session with " + selectedExpert.name;
+      var today = new Date().toISOString().split("T")[0];
+      document.getElementById("bookingDate").min = today;
+      document.getElementById("bookingDate").value = today;
+      document.getElementById("confirmationMsg").style.display = "none";
+      document.getElementById("bookingModal").classList.add("active");
+    }
+
+    function closeModal() {
+      document.getElementById("bookingModal").classList.remove("active");
+      selectedExpert = null;
+    }
+
+    function confirmBooking() {
+      if (!selectedExpert) return;
+      var booking = {
+        expertId: selectedExpert.id,
+        expertName: selectedExpert.name,
+        date: document.getElementById("bookingDate").value,
+        time: document.getElementById("bookingTime").value,
+        notes: document.getElementById("bookingNotes").value,
+        createdAt: new Date().toISOString()
+      };
+      var bookings = JSON.parse(localStorage.getItem("arcanax-bookings") || "[]");
+      bookings.push(booking);
+      localStorage.setItem("arcanax-bookings", JSON.stringify(bookings));
+      document.getElementById("confirmationMsg").style.display = "block";
+      setTimeout(closeModal, 2000);
+    }
+
+    // Filter buttons
+    document.querySelectorAll(".filter-btn").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        currentFilter = btn.getAttribute("data-filter");
+        renderExperts();
+      });
+    });
+
+    // Initial render
+    renderExperts();
+  </script>
+  <script src="js/ambient-sound.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

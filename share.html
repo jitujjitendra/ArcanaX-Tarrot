@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Your Tarot Reading as Image | ArcanaX</title>
+  <meta name="description" content="Create beautiful cosmic images of your tarot readings to share on social media or save as a keepsake.">
+  <meta name="keywords" content="share tarot reading, tarot image, tarot social media, tarot card image generator">
+  <link rel="canonical" href="https://arcanax.app/share.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Share Your Tarot Reading | ArcanaX">
+  <meta property="og:description" content="Create beautiful cosmic images of your tarot readings to share on social media.">
+  <meta property="og:url" content="https://arcanax.app/share.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ArcanaX">
+
+  <link rel="stylesheet" href="css/arcanax-pages.css">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ArcanaX Reading Image Creator",
+  "description": "Generate beautiful cosmic images of your tarot readings for sharing on social media.",
+  "url": "https://arcanax.app/share.html",
+  "applicationCategory": "LifestyleApplication",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ArcanaX"
+  }
+}
+  </script>
+
+  <style>
+    .share-hero { text-align: center; padding: 2rem 0; }
+    .share-controls { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2rem 0; }
+    @media (min-width: 768px) { .share-controls { grid-template-columns: 1fr 1fr; } }
+    .control-group { padding: 1.5rem; }
+    .control-group h3 { font-family: var(--ax-font-display); color: var(--ax-gold); margin-bottom: 1rem; font-size: 1.2rem; }
+    .control-group label { display: block; color: var(--ax-text-muted); font-size: 0.85rem; margin-bottom: 0.35rem; margin-top: 0.75rem; }
+    .control-group select,
+    .control-group input[type="text"],
+    .control-group input[type="color"] {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      background: var(--ax-bg);
+      border: 1px solid var(--ax-border);
+      border-radius: 0.5rem;
+      color: var(--ax-text);
+      font-size: 0.9rem;
+    }
+    .control-group select:focus,
+    .control-group input:focus { border-color: var(--ax-accent); outline: none; }
+    .control-group input[type="color"] { height: 40px; cursor: pointer; }
+    .preview-area { margin: 2rem 0; text-align: center; }
+    .preview-area canvas { max-width: 100%; height: auto; border-radius: var(--ax-radius); box-shadow: var(--ax-shadow-glow); }
+    .preview-placeholder { padding: 4rem 2rem; color: var(--ax-text-muted); font-style: italic; }
+    .action-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0; }
+    .breadcrumb { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 1rem 0; font-size: 0.85rem; }
+    .breadcrumb a { color: var(--ax-accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: var(--ax-text-muted); }
+    .reading-result { margin: 1.5rem 0; padding: 1.5rem; }
+    .reading-result h3 { color: var(--ax-gold); font-family: var(--ax-font-display); margin-bottom: 0.5rem; }
+    .reading-cards { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+    .reading-card-item { text-align: center; padding: 0.75rem; border-radius: 0.5rem; background: rgba(176,132,255,0.05); border: 1px solid var(--ax-border-accent); min-width: 120px; }
+    .reading-card-item .card-name { font-weight: 500; font-size: 0.9rem; }
+    .reading-card-item .card-position { font-size: 0.75rem; color: var(--ax-secondary); margin-top: 0.25rem; }
+  </style>
+</head>
+<body class="ax-page">
+  <div class="ax-nebula-bg"></div>
+  <div class="ax-container" style="padding-top: 1.5rem; padding-bottom: 3rem;">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a> <span>/</span>
+      <span>Share Reading</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="share-hero">
+      <p class="ax-eyebrow ax-mb-md">Create & Share</p>
+      <h1 class="ax-heading ax-heading-xl ax-text-gradient">Share Your Reading</h1>
+      <p class="ax-text-muted" style="max-width: 600px; margin: 1rem auto;">
+        Generate a beautiful cosmic image of your tarot reading to download or share on social media.
+      </p>
+    </header>
+
+    <!-- Controls -->
+    <div class="share-controls">
+      <div class="control-group ax-glass">
+        <h3>Reading Setup</h3>
+        <label for="spread-select">Choose Spread</label>
+        <select id="spread-select">
+          <option value="single">Single Card (Daily Guidance)</option>
+          <option value="three-card" selected>Three-Card (Past / Present / Future)</option>
+          <option value="relationship">Relationship Spread</option>
+          <option value="celtic-cross">Celtic Cross</option>
+        </select>
+
+        <label for="question-input">Your Question (optional)</label>
+        <input type="text" id="question-input" placeholder="What should I focus on today?">
+
+        <div style="margin-top: 1.25rem;">
+          <button id="draw-btn" class="ax-btn ax-btn-primary" style="width: 100%;">Draw Cards</button>
+        </div>
+      </div>
+
+      <div class="control-group ax-glass">
+        <h3>Customize Image</h3>
+        <label for="bg-start-color">Background Start Color</label>
+        <input type="color" id="bg-start-color" value="#0a0a1a">
+
+        <label for="bg-end-color">Background End Color</label>
+        <input type="color" id="bg-end-color" value="#1a0a2e">
+
+        <label for="accent-color">Accent Color</label>
+        <input type="color" id="accent-color" value="#b084ff">
+
+        <label for="image-size">Image Size</label>
+        <select id="image-size">
+          <option value="1200x630">Social Media (1200x630)</option>
+          <option value="1080x1080">Instagram Square (1080x1080)</option>
+          <option value="1080x1920">Story/Portrait (1080x1920)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Reading Result -->
+    <div id="reading-result" class="reading-result ax-glass" style="display:none;">
+      <h3>Your Reading</h3>
+      <div id="reading-cards" class="reading-cards"></div>
+    </div>
+
+    <!-- Preview Area -->
+    <div class="preview-area">
+      <div id="preview-container">
+        <div class="preview-placeholder ax-glass">
+          <p>Draw cards to generate your shareable reading image</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons" id="action-buttons" style="display:none;">
+      <button id="download-btn" class="ax-btn ax-btn-primary">Download Image</button>
+      <button id="copy-btn" class="ax-btn ax-btn-secondary">Copy to Clipboard</button>
+      <button id="regenerate-btn" class="ax-btn ax-btn-secondary">Regenerate</button>
+    </div>
+
+    <!-- Back Link -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="index.html" style="color: var(--ax-accent); text-decoration: none;">&#8592; Back to ArcanaX Home</a>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/tarot-engine.js"></script>
+  <script src="js/share-reading.js"></script>
+  <script>
+    (function() {
+      var currentCanvas = null;
+      var currentReading = null;
+
+      var spreadSelect = document.getElementById('spread-select');
+      var questionInput = document.getElementById('question-input');
+      var drawBtn = document.getElementById('draw-btn');
+      var downloadBtn = document.getElementById('download-btn');
+      var copyBtn = document.getElementById('copy-btn');
+      var regenerateBtn = document.getElementById('regenerate-btn');
+      var previewContainer = document.getElementById('preview-container');
+      var readingResult = document.getElementById('reading-result');
+      var readingCardsDiv = document.getElementById('reading-cards');
+      var actionButtons = document.getElementById('action-buttons');
+
+      var spreadMap = {
+        'single': { name: 'Single Card', count: 1, positions: ['Guidance'] },
+        'three-card': { name: 'Three-Card Spread', count: 3, positions: ['Past', 'Present', 'Future'] },
+        'relationship': { name: 'Relationship Spread', count: 5, positions: ['You', 'Partner', 'Connection', 'Challenge', 'Outcome'] },
+        'celtic-cross': { name: 'Celtic Cross', count: 10, positions: ['Present', 'Challenge', 'Past', 'Future', 'Above', 'Below', 'Advice', 'Environment', 'Hopes', 'Outcome'] }
+      };
+
+      function getImageDimensions() {
+        var sizeVal = document.getElementById('image-size').value;
+        var parts = sizeVal.split('x');
+        return { width: parseInt(parts[0]), height: parseInt(parts[1]) };
+      }
+
+      function getCustomOptions() {
+        var dims = getImageDimensions();
+        return {
+          width: dims.width,
+          height: dims.height,
+          bgGradientStart: document.getElementById('bg-start-color').value,
+          bgGradientEnd: document.getElementById('bg-end-color').value,
+          accentColor: document.getElementById('accent-color').value
+        };
+      }
+
+      function performReading() {
+        var spreadKey = spreadSelect.value;
+        var spreadInfo = spreadMap[spreadKey];
+        var deck = null;
+
+        // Try to use TarotEngine if available
+        if (typeof TarotEngine !== 'undefined' && TarotEngine.getDeck) {
+          deck = TarotEngine.getDeck();
+        }
+
+        var cards = [];
+        if (deck) {
+          var allCards = (deck.majorArcana || []).concat(deck.minorArcana || []);
+          // Shuffle
+          for (var i = allCards.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = allCards[i];
+            allCards[i] = allCards[j];
+            allCards[j] = tmp;
+          }
+          for (var k = 0; k < spreadInfo.count && k < allCards.length; k++) {
+            cards.push({
+              name: allCards[k].name,
+              position: spreadInfo.positions[k],
+              keywords: allCards[k].keywords || []
+            });
+          }
+        } else {
+          // Fallback: generic card names
+          var fallbackCards = ['The Fool', 'The Magician', 'The High Priestess', 'The Empress', 'The Emperor', 'The Hierophant', 'The Lovers', 'The Chariot', 'Strength', 'The Hermit'];
+          for (var m = 0; m < spreadInfo.count; m++) {
+            cards.push({
+              name: fallbackCards[m % fallbackCards.length],
+              position: spreadInfo.positions[m],
+              keywords: []
+            });
+          }
+        }
+
+        currentReading = {
+          spread: spreadInfo.name,
+          cards: cards,
+          question: questionInput.value.trim() || null
+        };
+
+        return currentReading;
+      }
+
+      function displayReadingResult(reading) {
+        readingCardsDiv.innerHTML = '';
+        reading.cards.forEach(function(card) {
+          var div = document.createElement('div');
+          div.className = 'reading-card-item';
+          div.innerHTML = '<div class="card-name">' + card.name + '</div>' +
+                          '<div class="card-position">' + card.position + '</div>';
+          readingCardsDiv.appendChild(div);
+        });
+        readingResult.style.display = 'block';
+      }
+
+      function generateImage() {
+        if (!currentReading) return;
+
+        var opts = getCustomOptions();
+        currentCanvas = ShareReading.createReadingImage(currentReading, opts);
+
+        if (currentCanvas) {
+          previewContainer.innerHTML = '';
+          previewContainer.appendChild(currentCanvas);
+          actionButtons.style.display = 'flex';
+        }
+      }
+
+      // Event listeners
+      drawBtn.addEventListener('click', function() {
+        var reading = performReading();
+        displayReadingResult(reading);
+        generateImage();
+      });
+
+      regenerateBtn.addEventListener('click', function() {
+        generateImage();
+      });
+
+      downloadBtn.addEventListener('click', function() {
+        if (currentCanvas) {
+          ShareReading.downloadImage(currentCanvas, 'arcanax-reading.png');
+        }
+      });
+
+      copyBtn.addEventListener('click', function() {
+        if (currentCanvas) {
+          currentCanvas.toBlob(function(blob) {
+            if (navigator.clipboard && navigator.clipboard.write) {
+              var item = new ClipboardItem({ 'image/png': blob });
+              navigator.clipboard.write([item]).then(function() {
+                copyBtn.textContent = 'Copied!';
+                setTimeout(function() { copyBtn.textContent = 'Copy to Clipboard'; }, 2000);
+              });
+            } else {
+              // Fallback: download
+              ShareReading.downloadImage(currentCanvas, 'arcanax-reading.png');
+            }
+          });
+        }
+      });
+
+      // Load deck on page load
+      if (typeof TarotEngine !== 'undefined' && TarotEngine.loadDeck) {
+        TarotEngine.loadDeck('assets/tarot-deck.json');
+      }
+    })();
+  </script>
+  <script src="js/ambient-sound.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

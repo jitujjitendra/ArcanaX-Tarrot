@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading Journal - ArcanaX Cosmic Destiny</title>
+  <meta name="description" content="Your personal tarot reading journal. Save, annotate, and track all your readings.">
+  <link rel="stylesheet" href="css/arcanax-pages.css">
+  <style>
+    .journal-page { min-height: 100vh; padding: 1.5rem 1.25rem; }
+    .journal-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+    .journal-header h1 { font-family: var(--ax-font-display); font-size: clamp(1.75rem, 4vw, 2.5rem); margin: 0; }
+    .header-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 0.5rem 0.9rem; color: var(--ax-text); font-size: 0.85rem; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .btn:hover { border-color: var(--ax-accent); color: var(--ax-accent); }
+    .btn-primary { background: linear-gradient(135deg, var(--ax-accent), #8060cc); border-color: var(--ax-accent); color: #fff; }
+    .btn-primary:hover { opacity: 0.85; color: #fff; }
+
+    /* Stats Dashboard */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: var(--ax-bg-card); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 1rem; text-align: center; }
+    .stat-value { font-size: 1.75rem; font-weight: 700; color: var(--ax-gold); font-family: var(--ax-font-display); }
+    .stat-label { font-size: 0.75rem; color: var(--ax-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; }
+
+    /* Search and Filters */
+    .search-bar { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .search-input { flex: 1; min-width: 200px; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 0.6rem 1rem; color: var(--ax-text); font-size: 0.9rem; outline: none; }
+    .search-input:focus { border-color: var(--ax-accent); }
+    .search-input::placeholder { color: var(--ax-text-muted); }
+    .filter-select { background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 0.6rem 0.8rem; color: var(--ax-text); font-size: 0.85rem; outline: none; }
+
+    /* Readings List */
+    .readings-list { display: flex; flex-direction: column; gap: 1rem; }
+    .reading-card { background: var(--ax-bg-card); border: 1px solid var(--ax-border); border-radius: var(--ax-radius-lg); padding: 1.25rem; transition: border-color 0.2s; cursor: pointer; }
+    .reading-card:hover { border-color: var(--ax-border-accent); }
+    .reading-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+    .reading-date { font-size: 0.8rem; color: var(--ax-text-muted); }
+    .reading-spread { font-size: 0.7rem; background: var(--ax-accent-soft); color: var(--ax-accent); padding: 0.2rem 0.5rem; border-radius: 1rem; }
+    .reading-question { font-size: 0.95rem; color: var(--ax-text); margin-bottom: 0.5rem; font-style: italic; }
+    .reading-cards-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .reading-card-badge { font-size: 0.7rem; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: 0.3rem; padding: 0.15rem 0.4rem; color: var(--ax-text-muted); }
+    .reading-notes-count { font-size: 0.75rem; color: var(--ax-secondary); }
+
+    /* Detail Modal */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: var(--ax-bg); border: 1px solid var(--ax-border); border-radius: var(--ax-radius-lg); max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 1.5rem; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .modal-close { background: none; border: none; color: var(--ax-text-muted); font-size: 1.5rem; cursor: pointer; }
+    .note-input { width: 100%; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 0.6rem; color: var(--ax-text); font-size: 0.85rem; resize: vertical; min-height: 60px; margin-top: 0.5rem; }
+    .note-item { padding: 0.5rem; margin-top: 0.4rem; background: var(--ax-bg-surface); border-radius: 0.5rem; font-size: 0.8rem; color: var(--ax-text-muted); }
+    .note-item-date { font-size: 0.65rem; color: var(--ax-accent); }
+    .empty-state { text-align: center; padding: 3rem 1rem; color: var(--ax-text-muted); }
+    .empty-state h3 { font-family: var(--ax-font-display); color: var(--ax-text); margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body class="ax-page journal-page">
+  <div class="ax-container">
+    <header class="journal-header">
+      <div>
+        <a href="index.html" class="btn" style="margin-bottom:0.5rem">&larr; Home</a>
+        <h1 class="ax-text-gradient">Reading Journal</h1>
+      </div>
+      <div class="header-actions">
+        <button class="btn" onclick="exportData()">Export JSON</button>
+        <button class="btn" onclick="document.getElementById('importFile').click()">Import</button>
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+        <a href="oracle.html" class="btn btn-primary">Ask Oracle</a>
+      </div>
+    </header>
+
+    <!-- Stats Dashboard -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card"><div class="stat-value" id="statTotal">0</div><div class="stat-label">Total Readings</div></div>
+      <div class="stat-card"><div class="stat-value" id="statWeek">0</div><div class="stat-label">This Week</div></div>
+      <div class="stat-card"><div class="stat-value" id="statMonth">0</div><div class="stat-label">This Month</div></div>
+      <div class="stat-card"><div class="stat-value" id="statFavSpread">-</div><div class="stat-label">Fav Spread</div></div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-bar">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search readings, cards, or notes..." oninput="performSearch()">
+      <select class="filter-select" id="spreadFilter" onchange="performSearch()">
+        <option value="">All Spreads</option>
+        <option value="single">Single Card</option>
+        <option value="three-card">Three Card</option>
+        <option value="celtic-cross">Celtic Cross</option>
+        <option value="relationship">Relationship</option>
+      </select>
+    </div>
+
+    <!-- Readings List -->
+    <div class="readings-list" id="readingsList">
+      <div class="empty-state" id="emptyState">
+        <h3>No readings yet</h3>
+        <p>Your tarot readings will appear here once you start using the oracle or perform readings.</p>
+        <a href="oracle.html" class="btn btn-primary" style="margin-top:1rem">Start Your First Reading</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="ax-heading ax-heading-sm ax-text-gradient" id="modalTitle">Reading Details</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="js/reading-journal.js"></script>
+  <script src="js/card-art-generator.js"></script>
+  <script>
+    (function() {
+      var currentReadings = [];
+
+      function init() {
+        updateStats();
+        loadReadings();
+      }
+
+      function updateStats() {
+        var stats = ReadingJournal.getStats();
+        document.getElementById('statTotal').textContent = stats.totalReadings;
+        document.getElementById('statWeek').textContent = stats.readingsThisWeek || 0;
+        document.getElementById('statMonth').textContent = stats.readingsThisMonth || 0;
+        document.getElementById('statFavSpread').textContent = stats.favoriteSpread ? stats.favoriteSpread.replace('-', ' ') : '-';
+      }
+
+      function loadReadings(filters) {
+        var readings = ReadingJournal.getReadings(filters || null);
+        currentReadings = readings;
+        renderReadings(readings);
+      }
+
+      function renderReadings(readings) {
+        var container = document.getElementById('readingsList');
+        var empty = document.getElementById('emptyState');
+
+        if (readings.length === 0) {
+          container.innerHTML = '';
+          container.appendChild(empty.cloneNode(true));
+          return;
+        }
+
+        var html = '';
+        for (var i = 0; i < readings.length; i++) {
+          var r = readings[i];
+          var date = new Date(r.timestamp);
+          var dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+          var timeStr = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+          html += '<div class="reading-card" onclick="openDetail(\'' + r.id + '\')">';
+          html += '<div class="reading-meta">';
+          html += '<span class="reading-date">' + dateStr + ' at ' + timeStr + '</span>';
+          if (r.spreadType) html += '<span class="reading-spread">' + r.spreadType + '</span>';
+          html += '</div>';
+          if (r.question) html += '<div class="reading-question">"' + escapeHtml(r.question) + '"</div>';
+          if (r.cardIds && r.cardIds.length > 0) {
+            html += '<div class="reading-cards-row">';
+            for (var j = 0; j < Math.min(5, r.cardIds.length); j++) {
+              html += '<span class="reading-card-badge">' + r.cardIds[j].replace(/-/g, ' ') + '</span>';
+            }
+            if (r.cardIds.length > 5) html += '<span class="reading-card-badge">+' + (r.cardIds.length - 5) + ' more</span>';
+            html += '</div>';
+          }
+          if (r.notes && r.notes.length > 0) {
+            html += '<div class="reading-notes-count">' + r.notes.length + ' note' + (r.notes.length > 1 ? 's' : '') + '</div>';
+          }
+          html += '</div>';
+        }
+        container.innerHTML = html;
+      }
+
+      window.performSearch = function() {
+        var query = document.getElementById('searchInput').value.trim();
+        var spread = document.getElementById('spreadFilter').value;
+
+        if (query) {
+          var results = ReadingJournal.searchReadings(query);
+          if (spread) {
+            results = results.filter(function(r) { return r.spreadType === spread; });
+          }
+          renderReadings(results);
+        } else if (spread) {
+          loadReadings({ spread: spread });
+        } else {
+          loadReadings();
+        }
+      };
+
+      window.openDetail = function(id) {
+        var reading = null;
+        for (var i = 0; i < currentReadings.length; i++) {
+          if (currentReadings[i].id === id) { reading = currentReadings[i]; break; }
+        }
+        if (!reading) return;
+
+        var modal = document.getElementById('detailModal');
+        var content = document.getElementById('modalContent');
+
+        var date = new Date(reading.timestamp);
+        var html = '<p style="color:var(--ax-text-muted);font-size:0.85rem;margin-bottom:1rem">' +
+          date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) +
+          ' at ' + date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + '</p>';
+
+        if (reading.question) {
+          html += '<p style="font-style:italic;margin-bottom:1rem">"' + escapeHtml(reading.question) + '"</p>';
+        }
+
+        if (reading.spreadType) {
+          html += '<p style="font-size:0.85rem;margin-bottom:0.5rem"><strong style="color:var(--ax-secondary)">Spread:</strong> ' + reading.spreadType + '</p>';
+        }
+
+        if (reading.cardIds && reading.cardIds.length > 0) {
+          html += '<div style="margin-bottom:1rem"><strong style="color:var(--ax-gold);font-size:0.85rem">Cards Drawn:</strong>';
+          html += '<div class="reading-cards-row" style="margin-top:0.4rem">';
+          for (var c = 0; c < reading.cardIds.length; c++) {
+            html += '<span class="reading-card-badge">' + reading.cardIds[c].replace(/-/g, ' ') + '</span>';
+          }
+          html += '</div></div>';
+        }
+
+        // Notes section
+        html += '<div style="margin-top:1rem;border-top:1px solid var(--ax-border);padding-top:1rem">';
+        html += '<strong style="color:var(--ax-accent);font-size:0.85rem">Notes</strong>';
+        if (reading.notes && reading.notes.length > 0) {
+          for (var n = 0; n < reading.notes.length; n++) {
+            html += '<div class="note-item"><div class="note-item-date">' +
+              new Date(reading.notes[n].timestamp).toLocaleDateString() + '</div>' +
+              escapeHtml(reading.notes[n].text) + '</div>';
+          }
+        }
+        html += '<textarea class="note-input" id="newNote" placeholder="Add a note..."></textarea>';
+        html += '<button class="btn btn-primary" style="margin-top:0.5rem" onclick="addNoteToReading(\'' + reading.id + '\')">Add Note</button>';
+        html += '</div>';
+
+        // Actions
+        html += '<div style="margin-top:1rem;display:flex;gap:0.5rem;border-top:1px solid var(--ax-border);padding-top:1rem">';
+        html += '<button class="btn" onclick="deleteEntry(\'' + reading.id + '\')">Delete Reading</button>';
+        html += '</div>';
+
+        content.innerHTML = html;
+        modal.classList.add('active');
+      };
+
+      window.closeModal = function() {
+        document.getElementById('detailModal').classList.remove('active');
+      };
+
+      window.addNoteToReading = function(id) {
+        var noteEl = document.getElementById('newNote');
+        var text = noteEl.value.trim();
+        if (!text) return;
+        ReadingJournal.addNote(id, text);
+        noteEl.value = '';
+        openDetail(id);
+        updateStats();
+      };
+
+      window.deleteEntry = function(id) {
+        if (confirm('Are you sure you want to delete this reading?')) {
+          ReadingJournal.deleteReading(id);
+          closeModal();
+          loadReadings();
+          updateStats();
+        }
+      };
+
+      window.exportData = function() {
+        var data = ReadingJournal.exportJournal();
+        var blob = new Blob([data], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'arcanax-journal-' + new Date().toISOString().split('T')[0] + '.json';
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+
+      window.importData = function(event) {
+        var file = event.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var count = ReadingJournal.importJournal(e.target.result);
+          alert('Imported ' + count + ' reading(s).');
+          loadReadings();
+          updateStats();
+        };
+        reader.readAsText(file);
+      };
+
+      function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // Close modal on overlay click
+      document.getElementById('detailModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+      });
+
+      init();
+    })();
+  </script>
+  <script src="js/ambient-sound.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

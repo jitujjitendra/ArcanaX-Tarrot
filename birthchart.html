@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birth Chart + Tarot - ArcanaX Cosmic Destiny</title>
+  <meta name="description" content="Discover your personal tarot cards based on your birth chart. Calculate sun, moon, and rising signs with Major Arcana correlations.">
+  <link rel="stylesheet" href="css/arcanax-pages.css">
+  <style>
+    .bc-page { min-height: 100vh; display: flex; flex-direction: column; }
+    .bc-header { padding: 1.5rem; border-bottom: 1px solid var(--ax-border); text-align: center; }
+    .bc-header h1 { font-family: var(--ax-font-display); font-size: 2rem; margin: 0 0 0.5rem; }
+    .bc-header p { color: var(--ax-text-muted); margin: 0; }
+    .bc-content { flex: 1; padding: 1.5rem; max-width: 900px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+    .input-section { background: var(--ax-bg-card); border: 1px solid var(--ax-border); border-radius: var(--ax-radius-lg); padding: 2rem; margin-bottom: 2rem; }
+    .input-section h2 { font-family: var(--ax-font-display); font-size: 1.3rem; margin: 0 0 1.5rem; color: var(--ax-gold); }
+    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group label { color: var(--ax-text-muted); font-size: 0.85rem; margin-bottom: 0.4rem; }
+    .form-group input { padding: 0.7rem 1rem; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: 0.5rem; color: var(--ax-text); font-size: 0.95rem; outline: none; }
+    .form-group input:focus { border-color: var(--ax-accent); }
+    .calculate-btn { display: block; width: 100%; margin-top: 1.5rem; padding: 0.9rem; background: linear-gradient(135deg, var(--ax-accent), #8060cc); border: none; border-radius: var(--ax-radius); color: #fff; font-weight: 600; font-size: 1rem; cursor: pointer; transition: opacity 0.2s; }
+    .calculate-btn:hover { opacity: 0.85; }
+    .result-section { display: none; }
+    .result-section.visible { display: block; }
+    .signs-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .sign-card { background: var(--ax-bg-card); border: 1px solid var(--ax-border); border-radius: var(--ax-radius-lg); padding: 1.5rem; text-align: center; transition: border-color 0.3s, box-shadow 0.3s; }
+    .sign-card:hover { border-color: var(--ax-border-accent); box-shadow: var(--ax-shadow-glow); }
+    .sign-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ax-text-muted); margin-bottom: 0.5rem; }
+    .sign-name { font-family: var(--ax-font-display); font-size: 1.5rem; color: var(--ax-gold); margin-bottom: 0.3rem; text-transform: capitalize; }
+    .sign-card-art { margin: 1rem auto; width: 100px; height: 150px; }
+    .sign-card-art svg { width: 100%; height: 100%; border-radius: 8px; }
+    .tarot-card-name { color: var(--ax-accent); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: capitalize; }
+    .sign-meaning { color: var(--ax-text-muted); font-size: 0.85rem; line-height: 1.5; }
+    .reading-section { background: var(--ax-bg-card); border: 1px solid var(--ax-border); border-radius: var(--ax-radius-lg); padding: 2rem; margin-bottom: 2rem; }
+    .reading-section h2 { font-family: var(--ax-font-display); font-size: 1.3rem; margin: 0 0 1rem; color: var(--ax-gold); }
+    .reading-text { color: var(--ax-text); line-height: 1.7; font-size: 0.95rem; }
+    .life-themes { margin-top: 1.5rem; }
+    .theme-item { background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+    .theme-area { color: var(--ax-accent); font-weight: 600; font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .theme-insight { color: var(--ax-text-muted); font-size: 0.85rem; line-height: 1.5; }
+    .save-btn { display: inline-block; margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--ax-bg-surface); border: 1px solid var(--ax-border-accent); border-radius: var(--ax-radius); color: var(--ax-accent); font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+    .save-btn:hover { background: var(--ax-accent-soft); }
+    .nav-link { display: inline-block; padding: 0.5rem 1rem; background: var(--ax-bg-surface); border: 1px solid var(--ax-border); border-radius: var(--ax-radius); color: var(--ax-accent); text-decoration: none; font-size: 0.85rem; transition: border-color 0.2s; }
+    .nav-link:hover { border-color: var(--ax-accent); }
+    .element-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.4rem; }
+    .element-fire { background: rgba(255,107,53,0.15); color: #ff6b35; border: 1px solid rgba(255,107,53,0.3); }
+    .element-water { background: rgba(78,205,196,0.15); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.3); }
+    .element-earth { background: rgba(143,206,0,0.15); color: #8fce00; border: 1px solid rgba(143,206,0,0.3); }
+    .element-air { background: rgba(184,212,227,0.15); color: #b8d4e3; border: 1px solid rgba(184,212,227,0.3); }
+    .saved-msg { color: #34d399; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
+  </style>
+</head>
+<body class="ax-page bc-page">
+  <header class="bc-header">
+    <h1>Birth Chart + Tarot</h1>
+    <p>Discover your personal Major Arcana through astrology</p>
+  </header>
+
+  <div class="bc-content">
+    <div class="input-section">
+      <h2>Enter Your Birth Details</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="birthDate">Birth Date</label>
+          <input type="date" id="birthDate" required>
+        </div>
+        <div class="form-group">
+          <label for="birthTime">Birth Time (optional)</label>
+          <input type="time" id="birthTime">
+        </div>
+        <div class="form-group">
+          <label for="birthPlace">Birth Place (optional)</label>
+          <input type="text" id="birthPlace" placeholder="City, Country">
+        </div>
+      </div>
+      <button class="calculate-btn" onclick="calculateChart()">Reveal Your Birth Chart Cards</button>
+    </div>
+
+    <div class="result-section" id="resultSection">
+      <div class="signs-row" id="signsRow"></div>
+
+      <div class="reading-section">
+        <h2>Your Natal Tarot Reading</h2>
+        <div class="reading-text" id="readingText"></div>
+        <div class="life-themes" id="lifeThemes"></div>
+        <button class="save-btn" onclick="saveChart()">Save Birth Chart</button>
+        <div class="saved-msg" id="savedMsg">Birth chart saved to your profile!</div>
+      </div>
+    </div>
+
+    <a href="index.html" class="nav-link">Back to Home</a>
+  </div>
+
+  <script src="js/birth-chart.js"></script>
+  <script src="js/card-art-generator.js"></script>
+  <script src="js/premium-engine.js"></script>
+  <script>
+    var lastReading = null;
+
+    function calculateChart() {
+      var dateVal = document.getElementById("birthDate").value;
+      if (!dateVal) { alert("Please enter your birth date"); return; }
+
+      var timeVal = document.getElementById("birthTime").value || null;
+      var placeVal = document.getElementById("birthPlace").value || "";
+
+      var reading = BirthChart.generateNatalReading({
+        date: dateVal,
+        time: timeVal,
+        place: placeVal
+      });
+      lastReading = reading;
+
+      // Render signs
+      var signsRow = document.getElementById("signsRow");
+      var signsHtml = "";
+
+      var signData = [
+        { label: "Sun Sign", sign: reading.signs.sun, data: reading.tarotCorrelation.sun },
+        { label: "Moon Sign", sign: reading.signs.moon, data: reading.tarotCorrelation.moon },
+        { label: "Rising Sign", sign: reading.signs.rising, data: reading.tarotCorrelation.rising }
+      ];
+
+      signData.forEach(function(s) {
+        if (!s.data) return;
+        var element = getSignElement(s.sign);
+        var svgHtml = "";
+        if (typeof CardArtGenerator !== "undefined" && s.data.card) {
+          svgHtml = CardArtGenerator.generateCardSVG(s.data.card, 100, 150);
+        }
+        signsHtml += '<div class="sign-card">' +
+          '<div class="sign-label">' + s.label + '</div>' +
+          '<div class="sign-name">' + s.sign + '</div>' +
+          '<span class="element-badge element-' + element + '">' + element + '</span>' +
+          '<div class="sign-card-art">' + svgHtml + '</div>' +
+          '<div class="tarot-card-name">' + (s.data.card || "").replace(/-/g, " ") + '</div>' +
+          '<div class="sign-meaning">' + (s.data.meaning || "") + '</div>' +
+          '</div>';
+      });
+      signsRow.innerHTML = signsHtml;
+
+      // Render reading
+      document.getElementById("readingText").textContent = reading.tarotCorrelation.combinedReading;
+
+      // Render life themes
+      var themesHtml = "";
+      reading.lifeThemes.forEach(function(t) {
+        themesHtml += '<div class="theme-item"><div class="theme-area">' + t.area + '</div><div class="theme-insight">' + t.insight + '</div></div>';
+      });
+      document.getElementById("lifeThemes").innerHTML = themesHtml;
+
+      document.getElementById("resultSection").classList.add("visible");
+      document.getElementById("savedMsg").style.display = "none";
+    }
+
+    function getSignElement(sign) {
+      var map = { aries:"fire", taurus:"earth", gemini:"air", cancer:"water", leo:"fire", virgo:"earth", libra:"air", scorpio:"water", sagittarius:"fire", capricorn:"earth", aquarius:"air", pisces:"water" };
+      return map[sign] || "fire";
+    }
+
+    function saveChart() {
+      if (!lastReading) return;
+      localStorage.setItem("arcanax-birthchart", JSON.stringify(lastReading));
+      document.getElementById("savedMsg").style.display = "block";
+    }
+
+    // Load saved chart on page load
+    (function() {
+      try {
+        var saved = localStorage.getItem("arcanax-birthchart");
+        if (saved) {
+          var data = JSON.parse(saved);
+          if (data.birthData && data.birthData.date) {
+            document.getElementById("birthDate").value = data.birthData.date;
+            if (data.birthData.time && data.birthData.time !== "unknown") {
+              document.getElementById("birthTime").value = data.birthData.time;
+            }
+            if (data.birthData.place && data.birthData.place !== "not specified") {
+              document.getElementById("birthPlace").value = data.birthData.place;
+            }
+          }
+        }
+      } catch(e) { /* ignore */ }
+    })();
+  </script>
+  <script src="js/ambient-sound.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>
