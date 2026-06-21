@@ -1,13 +1,31 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Inline build supports direct local preview and Hostinger upload. -->
+    <!-- Supports GitHub Pages (subfolder), Hostinger (root), and local file preview. -->
     <script>
       if (window.location.protocol !== "file:") {
-        document.write('<base href="/">');
+        var base = window.location.pathname;
+        // Detect GitHub Pages subfolder: /repo-name/
+        var match = base.match(/^(\/[^/]+\/)/);
+        if (window.location.hostname.endsWith('.github.io') && match) {
+          document.write('<base href="' + match[1] + '">');
+        } else {
+          document.write('<base href="/">');
+        }
       }
     </script>
     <meta charset="UTF-8" />
+    <!-- GitHub Pages SPA route restoration -->
+    <script>
+      (function(){
+        var q = window.location.search;
+        if (q && q.indexOf('?p=') === 0) {
+          var decoded = decodeURIComponent(q.slice(3));
+          var base = window.location.pathname.replace(/\/$/, '');
+          window.history.replaceState(null, '', base + decoded);
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ArcanaX - Tarot Guidance and Emotional Clarity</title>
     <meta

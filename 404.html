@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ArcanaX - Redirecting...</title>
+  <script>
+    // GitHub Pages SPA redirect hack:
+    // When GitHub Pages can't find a file, it serves 404.html.
+    // This script redirects to index.html with the original path preserved
+    // so the SPA router can handle it.
+    var pathSegmentsToKeep = 1; // Keep 1 segment for project name (e.g., /ArcanaX-Tarrot/)
+    var loc = window.location;
+    var repo = loc.pathname.split('/').slice(0, pathSegmentsToKeep + 1).join('/');
+    var path = loc.pathname.slice(repo.length) || '/';
+    var url = repo + '/?p=' + encodeURIComponent(path + loc.search + loc.hash);
+    loc.replace(url);
+  </script>
+</head>
+<body>
+  <p>Redirecting to ArcanaX...</p>
+</body>
+</html>
